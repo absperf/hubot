@@ -15,9 +15,9 @@ danger = Tests.danger helper, (req, res, url) ->
 
 # callbacks for when hubot sends messages
 tests = [
-  (msg) -> assert.equal "Hello!", msg
+  (msg) -> assert.equal "Hello Joanne!", msg
 ]
 
 # run the async tests
 danger.start tests, ->
-  helper.receive 'Joanne C. has entered the room.'
+  helper.receive 'Joanne C.   has entered the room.'
