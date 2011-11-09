@@ -16,7 +16,7 @@ deploy = (msg, target) ->
     runchef = spawn '/home/ubuntu/run-chef.sh'
     deploy_response(msg, runchef)
   else
-    msg.send "Can only deploy on: ${node_list.join(", ")}"
+    msg.send "Can only deploy on: ${node_list.join(', ')}"
 
 deploy_response = (msg, runchef) ->
   msg.send "Running chef deploy for #{target}... "
