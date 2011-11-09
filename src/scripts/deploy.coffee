@@ -1,5 +1,7 @@
-# Deploying...
-#            
+# Deploying to ops-proc01.
+# 
+# ship ops-proc01     - kicks off run-chef.sh
+
 spawn = require('child_process').spawn
 
 module.exports = (robot) ->
