@@ -1,6 +1,6 @@
 # Deploying to ops-proc01.
 # 
-# ship ops-proc01 - kicks off run-chef.sh 
+# ship ops-proc01 | ops-db01 - kicks off run-chef.sh on selected machine 
 
 spawn = require('child_process').spawn
 
