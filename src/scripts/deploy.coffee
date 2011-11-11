@@ -16,7 +16,7 @@ deploy = (msg, target) ->
   if target == node_list[0]
     runchef = spawn('ssh', ['ubuntu@172.18.0.121', '/home/ubuntu/run-chef.sh'])
     deploy_response(msg, runchef, target)
-  if target == node_list[1]
+  else if target == node_list[1]
     runchef = spawn('ssh', ['ubuntu@172.18.0.131', '/home/ubuntu/run-chef.sh'])
     deploy_response(msg, runchef, target)
   else
