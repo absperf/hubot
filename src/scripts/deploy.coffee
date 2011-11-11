@@ -26,7 +26,7 @@ deploy_response = (msg, runchef, target) ->
   msg.send "Running chef deploy for #{target}... "
   runchef.on("exit", (code) ->
     if code == 0
-      msg.send "Finished deploying on #{target} successfully."
+      msg.send "Finished deploying on #{target}."
     else
       msg.send "There was an error deploying on #{target}: Code #{code}"
   )
