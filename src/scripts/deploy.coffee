@@ -25,7 +25,9 @@ deploy = (msg, target) ->
       runchef = spawn('ssh', ["ubuntu@#{host_address}", '/home/ubuntu/run-chef.sh'])
       deploy_response(msg, runchef, host_name)
   else
-    msg.send "Can only deploy on: #{target_list.join(', ')}"
+    targets = for key, value of target_list
+      key
+    msg.send "Can only deploy on: #{targets.join(', ')}"
 
 deploy_response = (msg, runchef, target) ->
   runchef.on("exit", (code) ->
