@@ -9,7 +9,7 @@
 #                       mustaches it.
 module.exports = (robot) ->
   robot.respond /(image|img)( me)? (.*)/i, (msg) ->
-    imageMe msg, msg.match[3], (url) ->
+    imageMe msg, msg.match[4], (url) ->
       msg.send url
 
   robot.respond /animate me (.*)/i, (msg) ->
@@ -17,7 +17,7 @@ module.exports = (robot) ->
       msg.send url
 
   robot.respond /(?:mo?u)?sta(?:s|c)he?(?: me)? (.*)/i, (msg) ->
-    imagery = msg.match[2]
+    imagery = msg.match[3]
 
     if imagery.match /^https?:\/\//i
       msg.send "#{mustachify}#{imagery}"
