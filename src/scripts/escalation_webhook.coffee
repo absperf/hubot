@@ -1,6 +1,8 @@
-# Description
+# Description:
 #   Output escalations in chatroom via webhook.
-# 
+#
+# Commands:
+#   Just wait for alerts to happen
 
 module.exports = (robot) ->
   room = process.env.HUBOT_CAMPFIRE_ROOMS
