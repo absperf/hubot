@@ -11,6 +11,11 @@ module.exports = (robot) ->
     'http://25.media.tumblr.com/tumblr_m88olkJ1gj1qbwakso1_500.jpg',
     'http://25.media.tumblr.com/tumblr_m8wqnssMN41qd5j5io1_500.jpg',
     'http://24.media.tumblr.com/tumblr_m8f4cq84IL1qiwf8po1_500.jpg',
+    'http://25.media.tumblr.com/tumblr_m8jwu2jywV1qkajelo1_500.gif',
+    'http://25.media.tumblr.com/tumblr_m6psy25inb1qixk4mo1_r1_500.gif',
+    'http://24.media.tumblr.com/tumblr_m8wl02zJBY1rdi0uro1_250.gif',
+    'http://25.media.tumblr.com/tumblr_m8wl3qlLID1qmnzt5o1_500.jpg',
+    'http://24.media.tumblr.com/tumblr_m8wkkxsMtd1rdi0uro1_500.gif'
   ]
 
   robot.respond /corgi me/i, (msg) ->
