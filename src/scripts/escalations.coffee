@@ -64,7 +64,7 @@ listOpenEscalations = (msg, type, backend, message) ->
               count += 1
 
               if (count + 1) == items.length
-                message list.join("\n")
+                message response.join("\n")
 
 changeEscalationState = (msg, stateChange, backend, message) ->
   baseUrl = backendList[backend]
