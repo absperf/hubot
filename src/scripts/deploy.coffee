@@ -6,7 +6,7 @@ spawn = require('child_process').spawn
 
 module.exports = (robot) ->
   robot.respond /(ship|deploy) (.*)/i, (msg) ->
-    deploy msg, msg.match[3]
+    deploy msg, msg.match[2]
 
 host_list =
   'ops-db01': '172.18.0.121'
