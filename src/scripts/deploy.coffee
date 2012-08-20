@@ -22,7 +22,7 @@ deploy = (msg, target) ->
   if target_list[target]?
     for host_name in target_list[target]
       host_address = host_list[host_name]
-      runchef = spawn('ssh', ["ubuntu@#{host_address}", '/home/ubuntu/run-chef.sh'])
+      runchef = spawn('ssh', ["#{process.env.ROUTER_USER}@#{process.env.ROUTER_IP}", "ssh #{process.env.DEPLOY_USER}@#{host_address} /home/ubuntu/run-chef.sh'"])
       deploy_response(msg, runchef, host_name)
   else
     targets = for key, value of target_list
