@@ -33,10 +33,10 @@ backendList =
   ssbe06: 'core.ssbe06.qwest.sysshep.com'
 
 credentialsList =
-  'core.ssbe.localhost': os.environ['DEFAULT_CREDENTIALS']
-  'core.ops.sysshep.com': os.environ['STANDARD_CREDENTIALS']
-  'core.ss-internal2.den.sysshep.com': os.environ['STANDARD_CREDENTIALS']
-  'core.ssbe06.qwest.sysshep.com': os.environ['STANDARD_CREDENTIALS']
+  'core.ssbe.localhost': process.env.DEFAULT_CREDENTIALS
+  'core.ops.sysshep.com': process.env.STANDARD_CREDENTIALS
+  'core.ss-internal2.den.sysshep.com': process.env.STANDARD_CREDENTIALS
+  'core.ssbe06.qwest.sysshep.com': process.env.STANDARD_CREDENTIALS
 
 listOpenEscalations = (msg, type, backend, message) ->
   baseUrl = backendList[backend]
