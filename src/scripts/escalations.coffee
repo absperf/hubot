@@ -8,8 +8,8 @@
 #   hubot list <all, open, ack(nowleged), susp(ended), crit(icals), warn(ings)> at <backend>
 
 module.exports = (robot) ->
-  robot.respond /(list) ((open|ack|susp|all|crit|warn)(\w+)?) (at|on|from|for)? (.+)/i, (msg) ->
-    listOpenEscalations msg, msg.match[2], msg.match[4], (message) -> msg.send message
+  robot.respond /(list) (open|ack|susp|all|crit|warn)(\w+)? (at|on|from|for)? (.+)/i, (msg) ->
+    listOpenEscalations msg, msg.match[2], msg.match[5], (message) -> msg.send message
 
   robot.respond /(ack|acknowledge)( esc(alation)?)? (\d+)( (at|on))? (.+)/i, (msg) ->
     stateChange = { _type: 'StateChange', escalation_id: msg.match[4], escalation_state_id: '3', suspend_pretty_interval: '', change_notes: '' }
