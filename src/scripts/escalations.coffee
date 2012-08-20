@@ -47,18 +47,24 @@ listOpenEscalations = (msg, type, backend, message) ->
       .auth(credentials)
       .header('accept', mime)
       .get() (err, res, body) ->
-        for escalation in JSON.parse(body).items
-          buildOpenEscalationsList msg, type, escalation, credentials, (esc) -> message esc
 
-buildOpenEscalationsList = (msg, type, escalation, credentials, esc) ->
-  msg.http(escalation.href)
-    .auth(credentials)
-    .header('accept', mime)
-    .get() (err, res, body) ->
-      alert = JSON.parse(body)
-      types = RegExp(alert.current_status + "|all|" + alert.current_state)
+        items = JSON.parse(body).items
+        response = []
+        count = 0
 
-      esc alert.href.match(/\d+/) if type.match(types)
+        for item in items
+          msg.http(item.href)
+            .auth(credentials)
+            .header('accept', mime)
+            .get() (err, res, body) ->
+              alert = JSON.parse(body)
+              types = RegExp(alert.current_status + "|all|" + alert.current_state)
+
+              response.push alert.href.match(/\d+/)[0] if type.match(types)
+              count += 1
+
+              if (count + 1) == items.length
+                message list.join("\n")
 
 changeEscalationState = (msg, stateChange, backend, message) ->
   baseUrl = backendList[backend]
