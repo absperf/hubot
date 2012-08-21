@@ -4,7 +4,8 @@ module.exports = (robot) ->
   robot.enter (msg) ->
     name = msg.message.user.name
     name = name.split[0..-2].join(' ')
-    random_message(msg, name)
+
+    randomMessage(msg, name)
 
 randomMessage(msg, name) ->
   messages = [
