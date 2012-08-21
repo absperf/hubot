@@ -5,7 +5,7 @@
 #   Just wait for alerts to happen
 
 module.exports = (robot) ->
-  room = process.env.HUBOT_CAMPFIRE_ROOMS
+  room = process.env.OPS
   robot.router.post '/smith/escalation_hook', (req, res) ->
     body = req.body
     msg = "There was an escalation on #{body.client.name} affecting #{body.client.host}:\n"
