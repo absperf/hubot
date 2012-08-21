@@ -11,11 +11,13 @@ module.exports = (robot) ->
 host_list =
   'ops-db01': '172.18.0.121'
   'ops-proc01': '172.18.0.131'
+  'ops-proc02': '172.18.0.132'
 
 target_list =
   'ops-proc01': ['ops-proc01']
+  'ops-proc02': ['ops-proc02']
   'ops-db01': ['ops-db01']
-  'ops': ['ops-db01', 'ops-proc01']
+  'ops': ['ops-db01', 'ops-proc01', 'ops-proc02']
 
 deploy = (msg, target) ->
   runchef = ""
