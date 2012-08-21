@@ -39,7 +39,6 @@ module.exports = (robot) ->
     auth = ""
     for credential, value of credentialsList
       auth = value if href.match(credential)
-    console.log auth
 
     username = process.env.SSBE_USER
     password = process.env.SSBE_PASS
@@ -60,5 +59,5 @@ module.exports = (robot) ->
             items = JSON.parse(body).items
             values = items.map (item) -> item.value
             bars = createBars(values)
-            msg.send metric_name + " " + bars.join(' ')
+            msg.send metric_name + " " + bars.join('')
 
