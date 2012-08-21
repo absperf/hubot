@@ -7,7 +7,7 @@ module.exports = (robot) ->
 
     randomMessage(msg, name)
 
-randomMessage(msg, name) ->
+randomMessage = (msg, name) ->
   messages = [
     "Hello #{name}.",
     "What's up, #{name}?",
