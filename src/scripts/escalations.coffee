@@ -54,8 +54,7 @@ viewEscalation = (msg, escalation, backend, message) ->
         alert = JSON.parse(body)
 
         response = [
-          "Escalation ##{escalation}",
-          alert.href,
+          "Escalation ##{escalation}: #{alert.href}",
           "Current State: #{alert.current_state}",
           "Current Status: #{alert.current_status}"
         ]
@@ -76,7 +75,7 @@ viewEscalation = (msg, escalation, backend, message) ->
                   .auth(credentials)
                   .header('accept', mime)
                   .get() (err, res, body) ->
-                    alerting.push JSON.parse(body).href
+                    alerting.push "\t#{JSON.parse(body).href}"
 
                     count += 1
                     if (count + 1) == metric_hrefs.length
@@ -104,11 +103,12 @@ listOpenEscalations = (msg, type, backend, message) ->
             .get() (err, res, body) ->
               alert = JSON.parse(body)
               types = RegExp(alert.current_status + "|all|" + alert.current_state)
-
               id = /.+escalations\/(\d+)/
-              response.push alert.href.match(id)[1] if type.match(types)
-              count += 1
 
+              if type.match(types)
+                response.push "\t#{alert.href.match(id)[1]}"
+
+              count += 1
               if (count + 1) == items.length
                 message response.join("\n")
 
