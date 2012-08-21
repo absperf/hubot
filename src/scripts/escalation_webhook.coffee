@@ -6,8 +6,14 @@
 
 module.exports = (robot) ->
   room = process.env.HUBOT_CAMPFIRE_ROOMS
-  robot.router.get '/smith/escalation_hook', (req, res) ->
-    robot.messageRoom room, "Alert: " + req.body.toJSON
+  robot.router.post '/smith/escalation_hook', (req, res) ->
+    body = req.body
+    console.log req.client
+    msg = "There was an escalation on #{body.client.name} affecting #{body.host}:"
+    for esc in body.escalations
+      msg += "#{esc.message} (#{esc.escalation_href})\n"
+
+    robot.messageRoom room, "Alert: " + msg
     res.end "message sent"
 
 
