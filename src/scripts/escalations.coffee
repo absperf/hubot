@@ -76,7 +76,7 @@ viewEscalation = (msg, escalation, backend, message) ->
                   .auth(credentials)
                   .header('accept', mime)
                   .get() (err, res, body) ->
-                    alerting.push JSON.parse(body).name
+                    alerting.push JSON.parse(body).href
 
                     count += 1
                     if (count + 1) == metric_hrefs.length
