@@ -2,4 +2,12 @@
 
 module.exports = (robot) ->
   robot.enter (msg) ->
-    msg.send "Hello, #{msg.message.user.name}"
+    name = msg.message.user.name
+    name = name.split[0..-2].join(' ')
+    msg.send random_message(name)
+
+randomMessage(name) ->
+
+  messages = (name) ->
+    "Hello"
+
