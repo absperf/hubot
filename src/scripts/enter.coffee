@@ -4,9 +4,9 @@ module.exports = (robot) ->
   robot.enter (msg) ->
     name = msg.message.user.name
     name = name.split[0..-2].join(' ')
-    msg.send random_message(name)
+    random_message(msg, name)
 
-randomMessage(name) ->
+randomMessage(msg, name) ->
   messages = [
     "Hello #{name}.",
     "What's up, #{name}?",
@@ -20,5 +20,5 @@ randomMessage(name) ->
   ]
 
   rand = Math.floor(Math.random() * messages.length)
-  messages[rand * 3]
+  msg.send messages[rand * 3]
 
