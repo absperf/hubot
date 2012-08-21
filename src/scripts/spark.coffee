@@ -59,5 +59,5 @@ module.exports = (robot) ->
             items = JSON.parse(body).items
             values = items.map (item) -> item.value
             bars = createBars(values)
-            msg.send metric_name + " " + bars.join('')
+            msg.send metric_name + " " + bars.join('') + " " + values[values.length-1]
 
