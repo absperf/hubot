@@ -80,7 +80,7 @@ viewEscalation = (msg, escalation, backend, message) ->
 
                     count += 1
                     if (count + 1) == metric_hrefs.length
-                      response.push alerting.join(' ')
+                      response.push alerting.join("\n")
                       message response.join("\n")
 
 listOpenEscalations = (msg, type, backend, message) ->
