@@ -3,6 +3,7 @@
 #
 # Commands:
 #   hubot show [done|current|backlog|current_backlog] stories - shows current stories being worked on
+#   hubot add (bug|feature|chore) story
 #
 Parser = require("xml2js").Parser
 
@@ -42,7 +43,7 @@ module.exports = (robot) ->
         else
           sendStories(msg, json.iteration.stories)
 
-  robot.respond /add\s+(bug|feature|task)\s+(.+)/, (msg) ->
+  robot.respond /add\s+(bug|feature|chore)\s+(.+)/, (msg) ->
     storyType = msg.match[1]
     story = msg.match[2]
     sender = msg.message.user.name
