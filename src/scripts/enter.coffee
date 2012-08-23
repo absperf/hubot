@@ -21,5 +21,7 @@ randomMessage = (msg, name) ->
   ]
 
   rand = Math.floor(Math.random() * messages.length)
-  msg.send messages[rand * 3]
+  msg.send messages[rand * 2]
+
+
 
