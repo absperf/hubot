@@ -13,6 +13,11 @@ findType = (match) ->
   else
     return ""
 
+sendStories = (msg, stories) ->
+  storyStr = ""
+  for story in stories.story
+    storyStr += "#{story.story_type}: #{story.name} - #{story.current_state} by #{story.owned_by} (#{story.url})\n"
+  msg.send storyStr
 
 module.exports = (robot) ->
   robot.respond /show\s+(done|current|backlog|current_backlog)?(\s+)?stories/i, (msg)->
@@ -28,9 +33,11 @@ module.exports = (robot) ->
       sendError(err) if err
 
       parser.parseString body, (err, json) ->
-        stories = json.iteration.stories
-        storyStr = ""
-        for story in stories.story
-          storyStr += "#{story.story_type}: #{story.name} - #{story.current_state} by #{story.owned_by} (#{story.url})\n"
-        msg.send storyStr
+        sendError(err) if err
+
+        if json.iteration.length?
+          for iteration in json.iteration
+            sendStories(msg, iteration.stories)
+        else
+          sendStories(msg, json.iteration.stories)
 
