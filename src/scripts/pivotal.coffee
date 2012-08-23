@@ -7,6 +7,9 @@
 Parser = require("xml2js").Parser
 
 types = ['done', 'current', 'backlog', 'current_backlog']
+token = process.env.HUBOT_PIVOTAL_TOKEN
+projectId = process.env.HUBOT_PIVOTAL_PROJECT
+
 findType = (match) ->
   if match? and match in types
     return match
@@ -20,9 +23,7 @@ sendStories = (msg, stories) ->
   msg.send storyStr
 
 module.exports = (robot) ->
-  robot.respond /show\s+(done|current|backlog|current_backlog)?(\s+)?stories/i, (msg)->
-    token = process.env.HUBOT_PIVOTAL_TOKEN
-    projectId = process.env.HUBOT_PIVOTAL_PROJECT
+  robot.respond /show\s+(done|current|backlog|current_backlog)?(\s+)?stories/i, (msg) ->
     type = findType msg.match[1]
     parser = new Parser()
 
@@ -40,4 +41,14 @@ module.exports = (robot) ->
             sendStories(msg, iteration.stories)
         else
           sendStories(msg, json.iteration.stories)
+
+  robot.respond /add\s+(bug|feature|task)\s+(.+)/, (msg) ->
+    storyType = msg.match[1]
+    story = msg.match[2]
+    sender = msg.message.user.name
+
+    postData = "<story><story_type>#{storyType}</story_type><name>#{story}</name><requested_by>#{sender}</requested_by></story>"
+
+    msg.http("http://www.pivotaltracker.com/services/v3/projects/#{projectId}/stories").headers('X-TrackerToken': token, "Content-type": "application/xml").post(postData) (err, res, body) ->
+      sendError(err) if err
 
