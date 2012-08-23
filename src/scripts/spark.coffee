@@ -40,9 +40,6 @@ module.exports = (robot) ->
     for credential, value of credentialsList
       auth = value if href.match(credential)
 
-    username = process.env.SSBE_USER
-    password = process.env.SSBE_PASS
-
     href = msg.match[1]
     msg.http(href)
       .auth(auth)
