@@ -2,8 +2,10 @@
 
 module.exports = (robot) ->
   robot.enter (msg) ->
-    name = msg.message.user.name
-    name = name.split(' ')[0..-2].join(' ')
+    name = msg.message.user.name.split(' ')
+    name = name.pop if name.length > 1
+    name.join(' ')
+
     randomGreeting(msg, name)
 
 randomGreeting = (msg, name) ->
@@ -26,4 +28,6 @@ randomGreeting = (msg, name) ->
   rand = Math.floor(Math.random() * greetings.length)
   rand = rand * 4
 
-  msg.send greetings[rand] if greetings.length >= rand
+  if greetings.length >= rand
+    greeting = greetings[rand]
+    msg.send greeting
