@@ -5,20 +5,22 @@ module.exports = (robot) ->
     name = msg.message.user.name.split(' ')
     randomGreeting msg, name[0] (message) -> msg.send message
 
-  robot.hear /http.+[^(youtube|amazonaws|\.png|\.jpe?g|\.(g|t)iff?|pivotal|sysshep)]/, (msg) ->
-    randomExclamation(message) -> msg.send message
+  robot.hear /http.+(\s|$)/, (msg) ->
+    randomExclamation msg, (message) -> msg.send message
 
-randomExclamation = (message) ->
+randomExclamation = (msg, message) ->
   exclamations = [
     "Wooooooo!",
+    "Wow!",
     "Nice!",
     "Awesome!",
     "Whoa!",
-    "Sweet"
+    "Sweet!"
   ]
 
-  rand = Math.floor(Math.random() * exclamations.length)
-  message exclamations[rand]
+  unless msg.input.match /youtube|amazonaws|pivotal|sysshep|\.(png|jpe?g|(g|t|iff?))/
+    rand = Math.floor(Math.random() * exclamations.length)
+    message exclamations[rand]
 
 
 randomGreeting = (msg, name, message) ->
