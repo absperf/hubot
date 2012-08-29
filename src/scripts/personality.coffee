@@ -6,7 +6,8 @@
 module.exports = (robot) ->
   robot.enter (msg) ->
     name = msg.message.user.name.split(' ')
-    randomGreeting msg, name[0] (message) -> msg.send message
+    name = name[0] if name.length > 1
+    randomGreeting msg, name, (message) -> msg.send message
 
   robot.hear /^http[^\s]+$/, (msg) ->
     randomExclamation msg, (message) -> msg.send message
@@ -21,9 +22,9 @@ randomExclamation = (msg, message) ->
     "Sweet!"
   ]
 
-  unless msg.input.match(/sysshep/) || msg.user.name == 'Smith'
+  unless msg.match.input.match(/sysshep/) || msg.user.name == 'Smith'
     rand = Math.floor(Math.random() * exclamations.length)
-    message exclamations[rand]
+    message exclamations[rand] if rand <= exclamations.length
 
 
 randomGreeting = (msg, name, message) ->
@@ -44,5 +45,5 @@ randomGreeting = (msg, name, message) ->
   ]
 
   rand = Math.floor(Math.random() * greetings.length) * 4
-  message greetings[rand]
+  message greetings[rand] if rand <= greetings.length
 
