@@ -1,14 +1,27 @@
-# Greeting for entering the room
+# A personality for Smith
 
 module.exports = (robot) ->
   robot.enter (msg) ->
     name = msg.message.user.name.split(' ')
-    name = name.pop if name.length > 1
-    name.join(' ')
+    randomGreeting msg, name[0] (message) -> msg.send message
 
-    randomGreeting(msg, name)
+  robot.hear /http.+[^(youtube|amazonaws|\.png|\.jpe?g|\.(g|t)iff?|pivotal|sysshep)]/, (msg) ->
+    randomExclamation(message) -> msg.send message
 
-randomGreeting = (msg, name) ->
+randomExclamation = (message) ->
+  exclamations = [
+    "Wooooooo!",
+    "Nice!",
+    "Awesome!",
+    "Whoa!",
+    "Sweet"
+  ]
+
+  rand = Math.floor(Math.random() * exclamations.length)
+  message exclamations[rand]
+
+
+randomGreeting = (msg, name, message) ->
   greetings = [
     "Hello #{name}.",
     "What's up, #{name}?",
@@ -25,9 +38,6 @@ randomGreeting = (msg, name) ->
     "Paint me like one of your French girls, #{name}"
   ]
 
-  rand = Math.floor(Math.random() * greetings.length)
-  rand = rand * 4
+  rand = Math.floor(Math.random() * greetings.length) * 4
+  message greetings[rand]
 
-  if greetings.length >= rand
-    greeting = greetings[rand]
-    msg.send greeting
