@@ -30,6 +30,7 @@ randomExclamation = (msg, message) ->
 randomGreeting = (msg, name, message) ->
   greetings = [
     "Hello #{name}.",
+    "Hi, #{name}, how's it going?",
     "What's up, #{name}?",
     "Greetings, #{name}.",
     "Buongiorno, #{name}.",
@@ -40,8 +41,7 @@ randomGreeting = (msg, name, message) ->
     "#{name}, the hero that API deserves, but not the one it needs right now."
     "#{name}! Just the person we need!",
     "Heeeeeeeeeere's #{name}!",
-    "So #{name} calls me at like 2am, super drunk - 'I need you, Smith.' So I... oh. Hello #{name}.",
-    "Paint me like one of your French girls, #{name}"
+    "Draw me like one of your French girls, #{name}"
   ]
 
   rand = Math.floor(Math.random() * greetings.length) * 4
