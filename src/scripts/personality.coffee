@@ -24,5 +24,6 @@ randomGreeting = (msg, name) ->
   ]
 
   rand = Math.floor(Math.random() * greetings.length)
-  msg.send greetings[rand * 4]
+  rand = rand * 4
 
+  msg.send greetings[rand] if greetings.length >= rand
