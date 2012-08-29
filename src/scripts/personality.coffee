@@ -1,11 +1,14 @@
 # A personality for Smith
+# Random greeting (and random chance of occurance) on room entry.
+# Random exclamation for posted links
+
 
 module.exports = (robot) ->
   robot.enter (msg) ->
     name = msg.message.user.name.split(' ')
     randomGreeting msg, name[0] (message) -> msg.send message
 
-  robot.hear /http.+(\s|$)/, (msg) ->
+  robot.hear /^http[^\s]+$/, (msg) ->
     randomExclamation msg, (message) -> msg.send message
 
 randomExclamation = (msg, message) ->
@@ -18,7 +21,7 @@ randomExclamation = (msg, message) ->
     "Sweet!"
   ]
 
-  unless msg.input.match /youtube|amazonaws|pivotal|sysshep|\.(png|jpe?g|(g|t|iff?))/
+  unless msg.input.match(/sysshep/) || msg.user.name == 'Smith'
     rand = Math.floor(Math.random() * exclamations.length)
     message exclamations[rand]
 
