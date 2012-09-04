@@ -22,6 +22,8 @@ randomLoveMessage = (msg, message) ->
     "I love you but I'm not /in/ love with you.",
     "Can't we just be friends?"
   ]
+  rand = Math.floor(Math.random() * loveMessages.length)
+  message loveMessages[rand - 1]
 
 randomExclamation = (msg, message) ->
   exclamations = [
