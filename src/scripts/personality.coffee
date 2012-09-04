@@ -32,7 +32,8 @@ randomExclamation = (msg, message) ->
     "Nice!",
     "Awesome!",
     "Whoa!",
-    "Sweet!"
+    "Sweet!",
+    "daaaaaaaamn"
   ]
 
   unless msg.match.input.match(/sysshep/) || msg.message.user.name == 'Smith'
