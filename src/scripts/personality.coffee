@@ -1,4 +1,4 @@
-# A personality for Smith
+# A 'personality' for Smith
 # Random greeting (and random chance of occurance) on room entry.
 # Random exclamation for posted links
 
@@ -9,8 +9,19 @@ module.exports = (robot) ->
     name = name[0] if name.length > 1
     randomGreeting msg, name, (message) -> msg.send message
 
-  robot.hear /^http[^\s]+$/, (msg) ->
+  robot.hear /https?:\/\/[^\s]+/, (msg) ->
     randomExclamation msg, (message) -> msg.send message
+
+  robot.hear /(?=.*i)(?=.*love)(?=.*(smith|you)).*/i, (msg) ->
+    randomLoveMessage msg, (message) -> msg.send message
+
+randomLoveMessage = (msg, message) ->
+  loveMessages = [
+    'I love you too!',
+    "Awww, right back 'atcha!",
+    "I love you but I'm not /in/ love with you.",
+    "Can't we just be friends?"
+  ]
 
 randomExclamation = (msg, message) ->
   exclamations = [
@@ -22,10 +33,9 @@ randomExclamation = (msg, message) ->
     "Sweet!"
   ]
 
-  unless msg.match.input.match(/sysshep/) || msg.user.name == 'Smith'
+  unless msg.match.input.match(/sysshep/) || msg.message.user.name == 'Smith'
     rand = Math.floor(Math.random() * exclamations.length)
-    message exclamations[rand] if rand <= exclamations.length
-
+    message exclamations[rand - 1]
 
 randomGreeting = (msg, name, message) ->
   greetings = [
@@ -44,6 +54,6 @@ randomGreeting = (msg, name, message) ->
     "Draw me like one of your French girls, #{name}"
   ]
 
-  rand = Math.floor(Math.random() * greetings.length) * 4
-  message greetings[rand] if rand <= greetings.length
+  rand = Math.floor(Math.random() * greetings.length) * 5
+  message greetings[rand - 1] if rand <= greetings.length
 
