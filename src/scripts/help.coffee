@@ -1,9 +1,9 @@
-# Description: 
+# Description:
 #   Generates help commands for Hubot.
 #
 # Commands:
 #   hubot help - Displays all of the help commands that Hubot knows about.
-#   hubot help <query> - Displays all help commands that match <query>.
+#   hubot help [query] - Displays all help commands that match [query].
 #
 # URLS:
 #   /hubot/help

@@ -3,8 +3,8 @@
 #
 # Commands:
 #   hubot show [done|current|backlog|current_backlog] stories - shows current stories being worked on
-#   hubot add (bug|feature|chore) story
-#
+#   hubot add [bug|feature|chore] story
+
 Parser = require("xml2js").Parser
 
 types = ['done', 'current', 'backlog', 'current_backlog']

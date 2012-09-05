@@ -1,7 +1,10 @@
-# A 'personality' for Smith
-# 20% chance for random greeting on room entry
-# Random exclamation for posted links
-# Random response to 'I love you smith'
+# Description:
+#   A 'personality' for Smith
+#   Random greeting (and random chance of occurance) on room entry.
+#   Random exclamation for posted links
+#
+# Commands:
+#   None
 
 module.exports = (robot) ->
   robot.enter (msg) ->

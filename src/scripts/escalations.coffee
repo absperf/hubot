@@ -2,11 +2,11 @@
 #   A way to list and manage escalations in the System Shepherd backends.
 #
 # Commands:
-#   hubot acknowledge escalation <escalation id> at <backend>
-#   hubot close escalation <escalation id> at <backend>
-#   hubot suspend escalation <escalation id> at <backend> for <time>
-#   hubot list <all, open, ack(nowleged), susp(ended), crit(icals), warn(ings)> at <backend>
-#   hubot view <escalation id> at <backend>
+#   hubot acknowledge escalation [escalation id] at [backend]
+#   hubot close escalation [escalation id] at [backend]
+#   hubot suspend escalation [escalation id] at [backend] for [time]
+#   hubot list [all, open, ack(nowleged), susp(ended), crit(icals), warn(ings)] at [backend]
+#   hubot view [escalation id] at [backend]
 
 module.exports = (robot) ->
   robot.respond /(list) (open|ack|susp|all|crit|warn)(\w+)? (at|on|from|for)? (.+)/i, (msg) ->

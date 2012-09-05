@@ -2,8 +2,8 @@
 #   Make a little sparkline with unicode blocks
 #
 # Commands:
-#   spark [numbers]
-#   sparkmetric [metric_href]
+#   hubot spark [numbers]
+#   hubot sparkmetric [metric_href]
 
 mime = [ "application/vnd.absperf.ss#{v}j1+json" for v in "amk" ].join(', ')
 credentialsList =
@@ -22,7 +22,7 @@ module.exports = (robot) ->
         m = i
     m
 
-  createBars = (values) -> 
+  createBars = (values) ->
     mymax = max(values)
     step = mymax / 7 || 1
     bars = values.map (n) ->
