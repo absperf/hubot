@@ -2,7 +2,7 @@
 #   Make smith talk to other rooms for you.
 #
 # Commands:
-#   smith tell [room] [message] - send message to room (ops or dev)
+#   hubot tell [room] [message] - send message to room (ops or dev)
 
 rooms = {
   dev: process.env.DEV

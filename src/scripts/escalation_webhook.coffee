@@ -2,7 +2,7 @@
 #   Output escalations in chatroom via webhook.
 #
 # Commands:
-#   Just wait for alerts to happen
+#   None
 
 module.exports = (robot) ->
   room = process.env.OPS
