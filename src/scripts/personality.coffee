@@ -1,7 +1,7 @@
 # A 'personality' for Smith
-# Random greeting (and random chance of occurance) on room entry.
+# 20% chance for random greeting on room entry
 # Random exclamation for posted links
-
+# Random response to 'I love you smith'
 
 module.exports = (robot) ->
   robot.enter (msg) ->
@@ -17,28 +17,29 @@ module.exports = (robot) ->
 
 randomLoveMessage = (msg, message) ->
   loveMessages = [
-    'I love you too!',
+    "I love you too!",
     "Awww, right back 'atcha!",
     "I love you but I'm not /in/ love with you.",
-    "Can't we just be friends?"
+    "Can't we just be friends?",
+    "What's love got to do with it?"
   ]
   rand = Math.floor(Math.random() * loveMessages.length)
   message loveMessages[rand - 1]
 
 randomExclamation = (msg, message) ->
   exclamations = [
-    "Wooooooo!",
-    "Wow!",
-    "Nice!",
-    "Awesome!",
-    "Whoa!",
-    "Sweet!",
-    "daaaaaaaamn"
+    'Wooooooo!',
+    'Wow!',
+    'Nice!',
+    'Awesome!',
+    'Whoa!',
+    'Sweet!',
+    'Neat!',
+    'Daaaaaaaamn!'
   ]
-
   unless msg.match.input.match(/sysshep/) || msg.message.user.name == 'Smith'
-    rand = Math.floor(Math.random() * exclamations.length)
-    message exclamations[rand - 1]
+    rand = Math.floor(Math.random() * exclamations.length) * 5
+    message exclamations[rand - 1] if rand <= exclamations.length
 
 randomGreeting = (msg, name, message) ->
   greetings = [
@@ -56,7 +57,6 @@ randomGreeting = (msg, name, message) ->
     "Heeeeeeeeeere's #{name}!",
     "Draw me like one of your French girls, #{name}"
   ]
-
   rand = Math.floor(Math.random() * greetings.length) * 5
   message greetings[rand - 1] if rand <= greetings.length
 
