@@ -29,6 +29,7 @@ module.exports = (robot) ->
       "Et tu, Brute?",
       "Don't ever let go, Rose!",
       "I surrender to destiny!",
+      "End of line.",
       "Good night, good night! Parting is such sweet sorrow, that I shall say good night 'till it be morrow.",
       "All these moments will be lost in time. Like ... tears in the rain. Time to die."]
     rand = Math.floor(Math.random() * messages.length)
