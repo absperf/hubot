@@ -3,8 +3,6 @@
 #
 # Commands:
 #   hubot project idea
-#   hubot i need a project idea
-#   hubot give me a project idea
 
 module.exports = (robot) ->
   robot.respond /project\sidea/i, (msg) ->
