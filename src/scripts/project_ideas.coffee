@@ -7,7 +7,7 @@
 #   hubot give me a project idea
 
 module.exports = (robot) ->
-  robot.respond /^.+\sproject\sidea.+$/i, (msg) ->
+  robot.respond /^(.+\s)?project\sidea(\s.+)?$/i, (msg) ->
     inventIdea(message) -> msg.send message
 
 inventIdea = (message) ->
