@@ -7,7 +7,7 @@
 #   hubot give me a project idea
 
 module.exports = (robot) ->
-  robot.respond /^(.+\s)?project\sidea(\s.+)?$/i, (msg) ->
+  robot.respond /project\sidea/i, (msg) ->
     inventIdea(message) -> msg.send message
 
 inventIdea = (message) ->
@@ -20,7 +20,7 @@ inventIdea = (message) ->
   idea << random(targets)
   idea << '.'
 
-  message idea
+  message idea.join(" ")
 
 random = (array) ->
   array[Math.floor(Math.random() * array.length)]
