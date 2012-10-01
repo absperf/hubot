@@ -12,13 +12,12 @@ module.exports = (robot) ->
 
 inventIdea = (message) ->
   idea = []
-  idea << random(intros)
-  idea << 'web app like'
-  idea << random(projects)
-  idea << 'geared towards'
-  idea << random(types)
-  idea << random(targets)
-  idea << '.'
+  idea.push random(intros)
+  idea.push 'web app like'
+  idea.push random(projects)
+  idea.push 'geared towards'
+  idea.push random(types)
+  idea.push random(targets)
 
   message idea.join(" ")
 
@@ -66,20 +65,20 @@ types = [
 ]
 
 targets = [
-  'students',
-  'parents',
-  'programmers',
-  'writers',
-  'politicians',
-  'soldiers',
-  'astronauts',
-  'coal miners',
-  'waitresses',
-  'bakers',
-  'chefs',
-  'lawyers',
-  'pets',
-  'aliens',
-  'farmers',
-  'farm animals'
+  'students.',
+  'parents.',
+  'programmers.',
+  'writers.',
+  'politicians.',
+  'soldiers.',
+  'astronauts.',
+  'coal miners.',
+  'waitresses.',
+  'bakers.',
+  'chefs.',
+  'lawyers.',
+  'pets.',
+  'aliens.',
+  'farmers.',
+  'farm animals.'
 ]
