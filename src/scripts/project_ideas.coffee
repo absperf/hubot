@@ -8,9 +8,9 @@
 
 module.exports = (robot) ->
   robot.respond /project\sidea/i, (msg) ->
-    inventIdea(message) -> msg.send message
+    inventIdea(msg)
 
-inventIdea = (message) ->
+inventIdea = (msg) ->
   idea = []
   idea.push random(intros)
   idea.push 'web app like'
@@ -19,7 +19,7 @@ inventIdea = (message) ->
   idea.push random(types)
   idea.push random(targets)
 
-  message idea.join(" ")
+  msg.send idea.join(" ")
 
 random = (array) ->
   array[Math.floor(Math.random() * array.length)]
