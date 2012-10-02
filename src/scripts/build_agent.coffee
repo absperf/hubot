@@ -18,10 +18,10 @@ module.exports = (robot) ->
       msg.send "Cloning the jruby-agent-windows repo"
       if Fs.existsSync(workingCopy)
         msg.send "Executing `git pull`"
-        updateRepo = spawn('git', ['pull'], { cwd: workingCopy })
-        updateRepo.stdout.on 'data', (data) -> output.push data
-        updateRepo.stderr.on 'data', (data) -> output.push data
-        updateRepo.on 'exit', (code) ->
+        git = spawn('git', ['pull'], { cwd: workingCopy })
+        git.stdout.on 'data', (data) -> output.push data
+        git.stderr.on 'data', (data) -> output.push data
+        git.on 'exit', (code) ->
           if code == 0
             bundleInstall msg
           else
@@ -29,10 +29,10 @@ module.exports = (robot) ->
             msg.send output.join("\n")
       else
         msg.send "Executing `git clone`"
-        cloneRepo = spawn('git', ['clone', 'git@github.com:absperf/jruby-agent-windows.git', workingCopy])
-        cloneRepo.stdout.on 'data', (data) -> output.push data
-        cloneRepo.stderr.on 'data', (data) -> output.push data
-        cloneRepo.on 'exit', (code) ->
+        git = spawn('git', ['clone', 'git@github.com:absperf/jruby-agent-windows.git', workingCopy])
+        git.stdout.on 'data', (data) -> output.push data
+        git.stderr.on 'data', (data) -> output.push data
+        git.on 'exit', (code) ->
           if code == 0
             bundleInstall msg
           else
