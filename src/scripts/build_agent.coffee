@@ -17,28 +17,29 @@ module.exports = (robot) ->
     # depending on whether or not the working copy exists.
     updateRepo = (msg) ->
       msg.send "Cloning the jruby-agent-windows repo"
-      if fs.existsSync(workingCopy)
-        msg.send "Executing `git pull`"
-        git = spawn('git', ['pull'], { cwd: workingCopy })
-        git.stdout.on 'data', (data) -> output.push data
-        git.stderr.on 'data', (data) -> output.push data
-        git.on 'exit', (code) ->
-          if code == 0
-            bundleInstall msg
-          else
-            msg.send "Sorry, but I couldn't update the jruby-agent-windows repo"
-            msg.send output.join("\n")
-      else
-        msg.send "Executing `git clone`"
-        git = spawn('git', ['clone', 'git@github.com:absperf/jruby-agent-windows.git', workingCopy])
-        git.stdout.on 'data', (data) -> output.push data
-        git.stderr.on 'data', (data) -> output.push data
-        git.on 'exit', (code) ->
-          if code == 0
-            bundleInstall msg
-          else
-            msg.send "Sorry, but I couldn't clone the jruby-agent-windows repo"
-            msg.send output.join("\n")
+      fs.exists workingCopy, (exists) ->
+        if exists
+          msg.send "Executing `git pull`"
+          git = spawn('git', ['pull'], { cwd: workingCopy })
+          git.stdout.on 'data', (data) -> output.push data
+          git.stderr.on 'data', (data) -> output.push data
+          git.on 'exit', (code) ->
+            if code == 0
+              bundleInstall msg
+            else
+              msg.send "Sorry, but I couldn't update the jruby-agent-windows repo"
+              msg.send output.join("\n")
+        else
+          msg.send "Executing `git clone`"
+          git = spawn('git', ['clone', 'git@github.com:absperf/jruby-agent-windows.git', workingCopy])
+          git.stdout.on 'data', (data) -> output.push data
+          git.stderr.on 'data', (data) -> output.push data
+          git.on 'exit', (code) ->
+            if code == 0
+              bundleInstall msg
+            else
+              msg.send "Sorry, but I couldn't clone the jruby-agent-windows repo"
+              msg.send output.join("\n")
 
     # Runs `bundle install` for the jruby-agent-windows working copy.
     bundleInstall = (msg) ->
