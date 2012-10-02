@@ -3,10 +3,11 @@
 # Commands:
 #   hubot build windows agent - Build the Windows agent installer and upload it to S3
 
-spawn = require('child_process').spawn
-
 module.exports = (robot) ->
   robot.respond /build windows agent/, (msg) ->
+    spawn = require('child_process').spawn
+    fs = require('fs')
+
     workingCopy = '/mnt/sdf/jruby-agent-windows'
     output = []
 
@@ -16,7 +17,7 @@ module.exports = (robot) ->
     # depending on whether or not the working copy exists.
     updateRepo = (msg) ->
       msg.send "Cloning the jruby-agent-windows repo"
-      if Fs.existsSync(workingCopy)
+      if fs.existsSync(workingCopy)
         msg.send "Executing `git pull`"
         git = spawn('git', ['pull'], { cwd: workingCopy })
         git.stdout.on 'data', (data) -> output.push data
