@@ -1,7 +1,7 @@
 # Build the System Shepherd Agent installer.
 #
 # Commands:
-#   hubot build windows agent - Build the Windows agent installer and upload it to s3
+#   hubot build windows agent - Build the Windows agent installer and upload it to S3
 
 spawn = require('child_process').spawn
 
@@ -10,10 +10,14 @@ module.exports = (robot) ->
     workingCopy = '/mnt/sdf/jruby-agent-windows'
     output = []
 
+    msg.send "I'll get started building the Windows agent installer"
+
     # Updates the jruby-agent-windows working copy. Either does a clone or a pull
     # depending on whether or not the working copy exists.
     updateRepo = (msg) ->
+      msg.send "Cloning the jruby-agent-windows repo"
       if Fs.existsSync(workingCopy)
+        msg.send "Executing `git pull`"
         updateRepo = spawn('git', ['pull'], { cwd: workingCopy })
         updateRepo.stdout.on 'data', (data) -> output.push data
         updateRepo.stderr.on 'data', (data) -> output.push data
@@ -24,6 +28,7 @@ module.exports = (robot) ->
             msg.send "Sorry, but I couldn't update the jruby-agent-windows repo"
             msg.send output.join("\n")
       else
+        msg.send "Executing `git clone`"
         cloneRepo = spawn('git', ['clone', 'git@github.com:absperf/jruby-agent-windows.git', workingCopy])
         cloneRepo.stdout.on 'data', (data) -> output.push data
         cloneRepo.stderr.on 'data', (data) -> output.push data
@@ -36,6 +41,7 @@ module.exports = (robot) ->
 
     # Runs `bundle install` for the jruby-agent-windows working copy.
     bundleInstall = (msg) ->
+      msg.send "Executing `bundle install`"
       bundle = spawn('bundle', ['install'], { cwd: workingCopy })
       bundle.stdout.on 'data', (data) -> output.push data
       bundle.stderr.on 'data', (data) -> output.push data
@@ -49,6 +55,7 @@ module.exports = (robot) ->
     # Launches vagrant in the jruby-agent-windows working copy. Either does
     # `vagrant provision` or `vagrant up` depending on whether or not the VM is running.
     launchVagrant = (msg) ->
+      msg.send "Executing `vagrant status | grep running`"
       vagrant = spawn('vagrant', ['status'], { cwd: workingCopy })
       grep = spawn('grep', ['running'])
 
@@ -63,6 +70,7 @@ module.exports = (robot) ->
 
     # Runs `vagrant provision` for the jruby-agent-windows working copy.
     vagrantProvision = (msg) ->
+      msg.send "Executing `vagrant provision`"
       vagrant = span('vagrant', ['provision'], { cwd: workingCopy })
       vagrant.stdout.on 'data', (data) -> output.push data
       vagrant.stderr.on 'data', (data) -> output.push data
@@ -70,6 +78,7 @@ module.exports = (robot) ->
 
     # Runs `vagrant up` for the jruby-agent-windows working copy.
     vagrantUp = (msg) ->
+      msg.send "Executing `vagrant up`"
       vagrant = span('vagrant', ['up'], { cwd: workingCopy })
       vagrant.stdout.on 'data', (data) -> output.push data
       vagrant.stderr.on 'data', (data) -> output.push data
