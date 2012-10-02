@@ -1,6 +1,7 @@
 # Deploying to ops
 #
-# ship|deploy ops | ops-proc01 | ops-db01 - kicks off run-chef.sh on selected machine
+# Commands:
+#   hubot ship|deploy ops | ops-proc01 | ops-db01 - kicks off run-chef.sh on selected machine
 
 spawn = require('child_process').spawn
 
