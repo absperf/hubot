@@ -8,7 +8,7 @@ module.exports = (robot) ->
     spawn = require('child_process').spawn
     fs = require('fs')
 
-    workingCopy = '/mnt/sdf/jruby-agent-windows'
+    workingCopy = '/home/ubuntu/jruby-agent-windows'
     output = []
 
     msg.send "I'll get started building the Windows agent installer."
