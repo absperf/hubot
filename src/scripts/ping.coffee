@@ -31,6 +31,7 @@ module.exports = (robot) ->
       "I surrender to destiny!",
       "End of line.",
       'Bye bye kids! Have fun storming the castle!',
+      'http://sae.tweek.us/static/images/emoticons/emot-smithicide.gif'
       'http://sae.tweek.us/static/images/emoticons/emot-emo.gif',
       'http://sae.tweek.us/static/images/emoticons/emot-ghost.gif',
       'http://sae.tweek.us/static/images/emoticons/emot-suicide.gif',
