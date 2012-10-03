@@ -25,8 +25,8 @@ module.exports = (robot) ->
             if code == 0
               updateSubmodules msg
             else
-              msg.send "Sorry, but I couldn't update the jruby-agent-windows repo:"
               msg.send output.join("\n")
+              msg.send "Sorry, but I couldn't update the jruby-agent-windows repo:"
         else
           git = spawn('git', ['clone', 'git@github.com:absperf/jruby-agent-windows.git', workingCopy])
           git.stdout.on 'data', (data) -> output.push(data)
@@ -35,8 +35,8 @@ module.exports = (robot) ->
             if code == 0
               updateSubmodules msg
             else
-              msg.send "Sorry, but I couldn't clone the jruby-agent-windows repo:"
               msg.send output.join("\n")
+              msg.send "Sorry, but I couldn't clone the jruby-agent-windows repo:"
 
     # Runs `git submodule update --init` for the jruby-agent-windows working copy.
     updateSubmodules = (msg) ->
@@ -47,8 +47,8 @@ module.exports = (robot) ->
         if code == 0
           bundleInstall msg
         else
-          msg.send "Sorry, but I couldn't update the git submodules for the jruby-agent-windows repo:"
           msg.send output.join("\n")
+          msg.send "Sorry, but I couldn't update the git submodules for the jruby-agent-windows repo:"
 
     # Runs `bundle install` for the jruby-agent-windows working copy.
     bundleInstall = (msg) ->
@@ -59,8 +59,8 @@ module.exports = (robot) ->
         if code == 0
           launchVagrant msg
         else
-          msg.send "Sorry, but I couldn't run `bundle install` in the jruby-agent-windows repo:"
           msg.send output.join("\n")
+          msg.send "Sorry, but I couldn't run `bundle install` in the jruby-agent-windows repo:"
 
     # Launches vagrant in the jruby-agent-windows working copy. Either does
     # `vagrant provision` or `vagrant up` depending on whether or not the VM is running.
@@ -97,7 +97,7 @@ module.exports = (robot) ->
         msg.send "The Windows agent installer has been built and uploaded to S3 at https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent.exe."
         spawn('vagrant', ['halt'], { cwd: workingCopy })
       else
-        msg.send "Sorry, but I couldn't build the Windows agent installer:"
         msg.send output.join("\n")
+        msg.send "Sorry, but I couldn't build the Windows agent installer:"
 
     updateRepo msg
