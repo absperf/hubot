@@ -57,47 +57,21 @@ module.exports = (robot) ->
       bundle.stderr.on 'data', (data) -> output.push(data)
       bundle.on 'exit', (code) ->
         if code == 0
-          launchVagrant msg
+          runChef msg
         else
           msg.send output.join("\n")
           msg.send "Sorry, but I couldn't run `bundle install` in the jruby-agent-windows repo:"
 
-    # Launches vagrant in the jruby-agent-windows working copy. Either does
-    # `vagrant provision` or `vagrant up` depending on whether or not the VM is running.
-    launchVagrant = (msg) ->
-      vagrant = spawn('vagrant', ['status'], { cwd: workingCopy })
-      grep = spawn('grep', ['running'])
-
-      vagrant.stdout.on 'data', (data) -> grep.stdin.write(data)
-
-      vagrant.on 'exit', (code) ->
-        msg.send("Sorry, but I couldn't figure out if vagrant was running already.") unless code == 0
-        grep.stdin.end()
-
-      grep.on 'exit', (code) ->
-        if code == 0 then vagrantProvision(msg) else vagrantUp(msg)
-
-    # Runs `vagrant provision` for the jruby-agent-windows working copy.
-    vagrantProvision = (msg) ->
-      vagrant = spawn('vagrant', ['provision'], { cwd: workingCopy })
-      vagrant.stdout.on 'data', (data) -> output.push(data)
-      vagrant.stderr.on 'data', (data) -> output.push(data)
-      vagrant.on 'exit', (code) -> vagrantExit(code, msg)
-
-    # Runs `vagrant up` for the jruby-agent-windows working copy.
-    vagrantUp = (msg) ->
-      vagrant = spawn('vagrant', ['up'], { cwd: workingCopy })
-      vagrant.stdout.on 'data', (data) -> output.push(data)
-      vagrant.stderr.on 'data', (data) -> output.push(data)
-      vagrant.on 'exit', (code) -> vagrantExit(code, msg)
-
-    # Handles the completion of vagrant provisioning. If successful, the VM is halted.
-    vagrantExit = (code, msg) ->
-      if code == 0
-        msg.send "The Windows agent installer has been built and uploaded to S3 at https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent.exe."
-        spawn('vagrant', ['halt'], { cwd: workingCopy })
-      else
-        msg.send output.join("\n")
-        msg.send "Sorry, but I couldn't build the Windows agent installer:"
+    # Runs chef solo to build and upload the installer.
+    runChef = (msg) ->
+      chef = spawn('sudo', ['chef-solo', '-c', "#{workingCopy}/chef/solo.rb", '-j', "#{workingCopy}/chef/solo.json"], { cwd :workingCopy })
+      chef.stdout.on 'data', (data) -> output.push(data)
+      chef.stderr.on 'data', (data) -> output.push(data)
+      chef.on 'exit', (code) ->
+        if code == 0
+          msg.send "The Windows agent installer has been built and uploaded to S3 at https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent.exe."
+        else
+          msg.send output.join("\n")
+          msg.send "Sorry, but I couldn't build the Windows agent installer:"
 
     updateRepo msg
