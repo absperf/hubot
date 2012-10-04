@@ -68,20 +68,27 @@ module.exports = (robot) ->
           msg.send output.join("\n")
           msg.send "Sorry, but I couldn't run `bundle install` in the jruby-agent-#{platform} repo:"
 
-
     buildLinux = (msg) ->
-      arches = ['x64', 'i586']
 
-      for arch in arches
-        rake = spawn('bundle', ['exec', 'rake', "build_and_upload:#{arch}"], { cwd: workingCopy } )
-        rake.stdout.on 'data', (data) -> output.push(data)
-        rake.stderr.on 'data', (data) -> output.push(data)
-        rake.on 'exit', (code) ->
-          if code == 0
-            msg.send "The #{platform} #{arch} agent installer has been built and uploaded to s3 at https://s3.amazonaws.com/agent-dist/latest/agent-linux-#{arch}.sh"
-          else
-            msg.send output.join("\n")
-            msg.send "Sorry, but I couldn't build the #{platform} agent installer."
+      rake = spawn('bundle', ['exec', 'rake', "build_and_upload:x64"], { cwd: workingCopy } )
+      rake.stdout.on 'data', (data) -> output.push(data)
+      rake.stderr.on 'data', (data) -> output.push(data)
+      rake.on 'exit', (code) ->
+        if code == 0
+          msg.send "The #{platform} x64 agent installer has been built and uploaded to s3 at https://s3.amazonaws.com/agent-dist/latest/agent-linux-x64.sh"
+
+          rake = spawn('bundle', ['exec', 'rake', "build_and_upload:i586"], { cwd: workingCopy } )
+          rake.stdout.on 'data', (data) -> output.push(data)
+          rake.stderr.on 'data', (data) -> output.push(data)
+          rake.on 'exit', (code) ->
+            if code == 0
+              msg.send "The #{platform} i586 agent installer has been built and uploaded to s3 at https://s3.amazonaws.com/agent-dist/latest/agent-linux-i586.sh"
+            else
+              msg.send output.join("\n")
+              msg.send "Sorry, but I couldn't build the #{platform} agent installer."
+        else
+          msg.send output.join("\n")
+          msg.send "Sorry, but I couldn't build the #{platform} agent installer."
 
     # Runs chef solo to build and upload the installer.
     buildWindows = (msg) ->
