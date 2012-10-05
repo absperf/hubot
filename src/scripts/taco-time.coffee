@@ -20,9 +20,9 @@ findTacoTruck = (msg) ->
 
       times = [start, end]
 
-      if now.epoch() < start.epoch()
+      if epoch(now) < epoch(start)
         buildMessage(msg, 'next stop', times, nextStop)
-      else if now.epoch() > start.epoch() && now.epoch() < end.epoch()
+      else if epoch(now) > epoch(start) && epoch(now) < epoch(end)
         buildMessage(msg, 'current location', times, nextStop)
       else
         msg.send 'I have no idea where the truck is.'
