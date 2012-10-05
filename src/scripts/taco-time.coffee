@@ -19,8 +19,8 @@ findTacoTruck = (msg, message) ->
 
       times = [new Date(nextStop['start']), new Date(nextStop['end'])]
 
-      startEpoch = times[0].getTime / 1000
-      endEpoch = times[1].getTime / 1000
+      startEpoch = times[0].getTime() / 1000
+      endEpoch = times[1].getTime() / 1000
 
       if nowEpoch < startEpoch
         buildMessage(msg, 'next stop', times, nextStop, message)
