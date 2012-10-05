@@ -39,17 +39,14 @@ timeDuration = (time) ->
   else
     "#{hour}:#{minute}am"
 
-eventDuration = (start, end) ->
-  time = timeDuration(time)
-
 buildMessage = (msg, event, times, location) ->
   response = [ "The Comida Taco Truck's #{event} is '#{location['title']}'" ]
 
   if location['allDay']
     response.push "They will be there all day."
   else
-    startTime = timeDuration(start)
-    endTime = timeDuration(end)
+    startTime = timeDuration(times[0])
+    endTime = timeDuration(times[1])
 
     months = [ "January", "February", "March", "April", "May", "June",
                "July", "August", "September", "October", "November", "December" ]
