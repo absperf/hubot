@@ -43,7 +43,24 @@ buildMessage = (msg, event, times, location, message) ->
     endHour = endHour - 12 if endHour > 12
     endMinute = times[1].getMinutes()
 
-    response.push "They will be there from #{startHour}:#{startMinute} to #{endHour}:#{endMinute}."
+    months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December" ]
+
+    day = times[0].getDate()
+    month = months[times[0].getMonth()]
+
+    response.push "They will be there on #{month} #{day} from #{startHour}:#{startMinute} to #{endHour}:#{endMinute}."
 
   response.push location['url']
 
