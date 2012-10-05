@@ -15,7 +15,7 @@ findTacoTruck = (msg, message) ->
       nextStop = JSON.parse(body)[0]
 
       now = new Date
-      nowEpoch = now.getTime / 1000
+      nowEpoch = now.getTime() / 1000
 
       times = [new Date(nextStop['start']), new Date(nextStop['end'])]
 
