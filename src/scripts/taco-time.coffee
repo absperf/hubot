@@ -6,9 +6,9 @@
 
 module.exports = (robot) ->
   robot.respond /where is the taco truck/i, (msg) ->
-    findTacoTruck msg, (message) ->  msg.send message
+    findTacoTruck msg
 
-findTacoTruck = (msg, message) ->
+findTacoTruck = (msg) ->
   msg.http('http://www.eatcomida.com/wp-content/themes/eatcomida/includes/json-feed.php')
     .header('accept', 'application/json')
     .get() (err, res, body) ->
@@ -23,13 +23,13 @@ findTacoTruck = (msg, message) ->
       endEpoch = times[1].getTime() / 1000
 
       if nowEpoch < startEpoch
-        buildMessage(msg, 'next stop', times, nextStop, message)
+        buildMessage(msg, 'next stop', times, nextStop)
       else if nowEpoch > startEpoch && nowEpoch < endEpoch
-        buildMessage(msg, 'current location', times, nextStop, message)
+        buildMessage(msg, 'current location', times, nextStop)
       else
-        message 'I have no idea where the truck is.'
+        msg.send 'I have no idea where the truck is.'
 
-buildMessage = (msg, event, times, location, message) ->
+buildMessage = (msg, event, times, location) ->
   response = [ "The Comida Taco Truck's #{event} is '#{location['title']}'" ]
 
   if location['allDay']
@@ -70,9 +70,8 @@ buildMessage = (msg, event, times, location, message) ->
 
     response.push "They will be there on #{month} #{day} from #{startTime} to #{endTime}."
 
-
   msg.send response.join("\n")
-  message location['url']
+  msg.send location['url']
 
 
 
