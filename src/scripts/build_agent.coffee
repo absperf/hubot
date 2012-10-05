@@ -5,9 +5,9 @@
 #   hubot build linux agent - Build the Linix agent installer and upload it to S3
 
 module.exports = (robot) ->
-  robot.respond /build (windows|linux) agent$/i, (msg) ->
+  robot.respond /build( the)? (windows|linux) (agent|installer)$/i, (msg) ->
 
-    platform = msg.match[1]
+    platform = msg.match[2]
     spawn = require('child_process').spawn
     fs = require('fs')
 
