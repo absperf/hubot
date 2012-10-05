@@ -45,8 +45,10 @@ buildMessage = (msg, event, times, location) ->
   if location['allDay']
     response.push "They will be there all day."
   else
-    startTime = timeDuration(times[0])
-    endTime = timeDuration(times[1])
+    start = times[0]
+    end = times[1]
+    startTime = timeDuration(start)
+    endTime = timeDuration(end)
 
     months = [ "January", "February", "March", "April", "May", "June",
                "July", "August", "September", "October", "November", "December" ]
