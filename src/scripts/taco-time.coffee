@@ -30,7 +30,7 @@ findTacoTruck = (msg, message) ->
         message 'I have no idea where the truck is.'
 
 buildMessage = (msg, event, times, location, message) ->
-  response = [ "The Comida Taco Truck's #{event}: #{location['title']}" ]
+  response = [ "The Comida Taco Truck's #{event} is '#{location['title']}'" ]
 
   if location['allDay']
     response.push "They will be there all day."
@@ -42,14 +42,14 @@ buildMessage = (msg, event, times, location, message) ->
     endMinute = times[1].getMinutes()
 
     if startHour > 12
-      startHour = "#{startHour - 12}:#{startMinute}pm"
+      startTime = "#{startHour - 12}:#{startMinute}pm"
     else
-      startHour = "#{startHour}:#{startMinute}am"
+      startTime = "#{startHour}:#{startMinute}am"
 
     if endHour > 12
-      endHour = "#{endHour - 12}:#{endMinute}pm"
+      endTime = "#{endHour - 12}:#{endMinute}pm"
     else
-      endHour = "#{endHour}:#{endMinute}am"
+      endTime = "#{endHour}:#{endMinute}am"
 
     months = [
       "January",
@@ -68,9 +68,7 @@ buildMessage = (msg, event, times, location, message) ->
     day = times[0].getDate()
     month = months[times[0].getMonth()]
 
-    response.push "They will be there on #{month} #{day} from #{startHour}:#{startMinute} to #{endHour}:#{endMinute}."
+    response.push "They will be there on #{month} #{day} from #{startTime} to #{endTime}."
 
-  response.push location['url']
-
-  message response.join("\n")
+  msg.send response.join("\n")
 
