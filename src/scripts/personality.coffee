@@ -20,7 +20,6 @@ module.exports = (robot) ->
       "Bonjour, #{name}."
       "Hola, #{name}.",
       "Aloha, #{name}.",
-      "Oh great, It's #{name}...",
       "#{name}, the hero that API deserves, but not the one it needs right now."
       "#{name}! Just the person we need!",
       "Heeeeeeeeeere's #{name}!",
