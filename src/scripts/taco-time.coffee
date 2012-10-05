@@ -6,7 +6,7 @@
 
 module.exports = (robot) ->
   robot.respond /where is the taco truck/i, (msg) ->
-    findTacoTruck msg, (mesage) ->  msg.send message
+    findTacoTruck msg, (message) ->  msg.send message
 
 findTacoTruck = (msg, message) ->
   msg.http('http://www.eatcomida.com/wp-content/themes/eatcomida/includes/json-feed.php')
@@ -44,6 +44,7 @@ buildMessage = (msg, event, times, location, message) ->
     endMinute = times[1].getMinutes()
 
     response.push "They will be there from #{startHour}:#{startMinute} to #{endHour}:#{endMinute}."
+
   response.push location['url']
 
   message response.join("\n")
