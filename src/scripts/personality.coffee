@@ -49,7 +49,7 @@ module.exports = (robot) ->
       "Can't we just be friends?",
       "What's love got to do with it?"
     ]
-    randomMessage msg, messages, 1, (message) -> msg.send message
+    randomMessage msg, loveMessages, 1, (message) -> msg.send message
 
 randomMessage = (msg, messages, multiplier, message) ->
   randomNumber = Math.floor(Math.random() * messages.length) * multiplier
