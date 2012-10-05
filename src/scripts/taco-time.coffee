@@ -12,22 +12,35 @@ findTacoTruck = (msg) ->
   msg.http('http://www.eatcomida.com/wp-content/themes/eatcomida/includes/json-feed.php')
     .header('accept', 'application/json')
     .get() (err, res, body) ->
-      nextStop = JSON.parse(body)[0]
+      nextEvent = JSON.parse(body)[0]
 
       now = new Date
-      nowEpoch = now.getTime() / 1000
+      start = new Date(nextEvent['start'])
+      end = new Date(nextEvent['end'])
 
-      times = [new Date(nextStop['start']), new Date(nextStop['end'])]
+      times = [start, end]
 
-      startEpoch = times[0].getTime() / 1000
-      endEpoch = times[1].getTime() / 1000
-
-      if nowEpoch < startEpoch
+      if now.epoch() < start.epoch()
         buildMessage(msg, 'next stop', times, nextStop)
-      else if nowEpoch > startEpoch && nowEpoch < endEpoch
+      else if now.epoch() > start.epoch() && now.epoch() < end.epoch()
         buildMessage(msg, 'current location', times, nextStop)
       else
         msg.send 'I have no idea where the truck is.'
+
+epoch = (time) ->
+  time.getTime() / 1000
+
+timeDuration = (time) ->
+  hour = time.getHours() - 6 # time zone hax. fixme
+  minute = time.getMinutes()
+
+  if hour > 12
+    "#{hour - 12}:#{minute}pm"
+  else
+    "#{hour}:#{minute}am"
+
+eventDuration = (start, end) ->
+  time = timeDuration(time)
 
 buildMessage = (msg, event, times, location) ->
   response = [ "The Comida Taco Truck's #{event} is '#{location['title']}'" ]
@@ -35,38 +48,14 @@ buildMessage = (msg, event, times, location) ->
   if location['allDay']
     response.push "They will be there all day."
   else
-    startHour = times[0].getHours()
-    endHour = times[1].getHours()
+    startTime = timeDuration(start)
+    endTime = timeDuration(end)
 
-    startMinute = times[0].getMinutes()
-    endMinute = times[1].getMinutes()
+    months = [ "January", "February", "March", "April", "May", "June",
+               "July", "August", "September", "October", "November", "December" ]
 
-    if startHour > 12
-      startTime = "#{startHour - 12}:#{startMinute}pm"
-    else
-      startTime = "#{startHour}:#{startMinute}am"
-
-    if endHour > 12
-      endTime = "#{endHour - 12}:#{endMinute}pm"
-    else
-      endTime = "#{endHour}:#{endMinute}am"
-
-    months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December" ]
-
-    day = times[0].getDate()
-    month = months[times[0].getMonth()]
+    day = start.getDate()
+    month = months[start.getMonth()]
 
     response.push "They will be there on #{month} #{day} from #{startTime} to #{endTime}."
 
