@@ -26,7 +26,7 @@ module.exports = (robot) ->
       "Heeeeeeeeeere's #{name}!",
       "Draw me like one of your French girls, #{name}"
     ]
-    randomMessage(msg, greetings, 5, message) -> msg.send message
+    randomMessage msg, greetings, 5, (message) -> msg.send message
 
   robot.hear /(https?:\/\/[^\s]+)|(.+\.(png|gif|jpe?g))/, (msg) ->
     exclamations = [
@@ -39,7 +39,7 @@ module.exports = (robot) ->
       'Neat!',
       'Daaaaaaaamn!'
     ]
-    randomMessage(msg, exclamations, 5, message) -> msg.send message
+    randomMessage msg, exclamations, 5, (message) -> msg.send message
 
   robot.respond /i\slove\syou/i, (msg) ->
     loveMessages = [
@@ -49,7 +49,7 @@ module.exports = (robot) ->
       "Can't we just be friends?",
       "What's love got to do with it?"
     ]
-    randomMessage(msg, messages, 1, message) -> msg.send message
+    randomMessage msg, messages, 1, (message) -> msg.send message
 
 randomMessage = (msg, messages, multiplier, message) ->
   randomNumber = Math.floor(Math.random() * messages.length) * multiplier
