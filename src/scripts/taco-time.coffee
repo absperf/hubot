@@ -71,7 +71,9 @@ buildMessage = (msg, event, times, location) ->
     response.push "They will be there on #{month} #{day} from #{startTime} to #{endTime}."
 
   msg.send response.join("\n")
-  msg.send location['url']
+  setTimeout (->
+    msg.send location['url']
+  ), 2000
 
 
 
