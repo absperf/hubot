@@ -36,12 +36,20 @@ buildMessage = (msg, event, times, location, message) ->
     response.push "They will be there all day."
   else
     startHour = times[0].getHours()
-    startHour = startHour - 12 if startHour > 12
-    startMinute = times[0].getMinutes()
-
     endHour = times[1].getHours()
-    endHour = endHour - 12 if endHour > 12
+
+    startMinute = times[0].getMinutes()
     endMinute = times[1].getMinutes()
+
+    if startHour > 12
+      startHour = "#{startHour - 12}:#{startMinute}pm"
+    else
+      startHour = "#{startHour}:#{startMinute}am"
+
+    if endHour > 12
+      endHour = "#{endHour - 12}:#{endMinute}pm"
+    else
+      endHour = "#{endHour}:#{endMinute}am"
 
     months = [
       "January",
