@@ -28,6 +28,8 @@ module.exports = (robot) ->
           response = []
           response.push "#{business.name} (rated: #{business.rating}/5 by #{business.review_count} people.)"
           response.push business.location.address
-          response.push business.url
 
           msg.send response.join("\n")
+          setTimeout (->
+            msg.send business.url
+          ), 2000
