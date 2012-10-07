@@ -15,21 +15,24 @@ yelp = require('yelp').createClient(
 )
 
 module.exports = (robot) ->
-  robot.respond /(.+) (food|lunch|restaurant) (at|in|near|by|around|close to) (.*)/i, (msg) ->
-    food = msg[1]
-    food = 'food' if food == 'random'
+  robot.respond /where (do you think|should) (we|i)? (eat|have lunch|munch)/i, (msg) ->
 
-    search = { term: food, location: msg.match[4] }
+module.exports = (robot) ->
+  robot.respond /(.+) (food|restaurant) (at|in|near|by|around|close to) (.*)/i, (msg) ->
+    filter = msg[1]
 
-    yelp.search search, (error, data)->
+    if filter == 'random'
+      filter = 'bagels,bakeries,breweries,desserts,foodtrucks,gourmet,streetvendors,restaurants'
+
+    query =
+      term: ''
+      category_filter: filter
+      location: msg.match[4]
+
+    yelp.search query, (error, data)->
       unless error
         if data.businesses.length > 0
-          business = data.businesses[Math.floor(Math.random() * data.businesses.length) - 1]
-          response = []
-          response.push "#{business.name} (rated: #{business.rating}/5 by #{business.review_count} people.)"
-          response.push business.location.address
+          bsns = data.businesses[Math.floor(Math.random() * data.businesses.length) - 1]
 
-          msg.send response.join("\n")
-          setTimeout (->
-            msg.send business.url
-          ), 2000
+          msg.send "#{business.name} at #{business.location.address} (rated: #{business.rating}/5 by #{business.review_count}}people.)"
+          msg.send business.url
