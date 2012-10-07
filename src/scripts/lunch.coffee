@@ -32,7 +32,7 @@ module.exports = (robot) ->
     yelp.search query, (error, data)->
       unless error
         if data.businesses.length > 0
-          bsns = data.businesses[Math.floor(Math.random() * data.businesses.length) - 1]
+          business = data.businesses[Math.floor(Math.random() * data.businesses.length) - 1]
 
           msg.send "#{business.name} at #{business.location.address} (rated: #{business.rating}/5 by #{business.review_count}}people.)"
           msg.send business.url
