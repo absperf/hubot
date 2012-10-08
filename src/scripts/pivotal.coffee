@@ -66,7 +66,7 @@ module.exports = (robot) ->
     user.pivotalUsername = user.pivotalUsername || ""
 
 
-    postData = "<story><story_type>#{storyType}</story_type><name>#{story}</name><requested_by>#{sender}</requested_by></story>"
+    postData = "<story><story_type>#{storyType}</story_type><name>#{story}</name><requested_by>#{user.pivotalUsername}</requested_by></story>"
 
     msg.http("http://www.pivotaltracker.com/services/v3/projects/#{projectId}/stories").headers('X-TrackerToken': token, "Content-type": "application/xml").post(postData) (err, res, body) ->
       sendError(err) if err
