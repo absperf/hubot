@@ -23,6 +23,7 @@ module.exports = (robot) ->
         "Tim, when we last met I was but a student... but now /I/ am the master!"
       ]
       msg.send randomMessage[Math.floor(Math.random() * randomMessage.length)]
+      numberOfSeals = Math.floor(Math.random() * 3) + 3 # minimum 3, max 6
       createJutsu(msg, numberOfSeals)
 
   robot.respond /(kill|destroy|attack) (.+)/i, (msg) ->
