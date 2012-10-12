@@ -24,13 +24,13 @@ module.exports = (robot) ->
         "Tim, when we last met I was but a student... but now /I/ am the master!"
       ]
       msg.send randomMessage[Math.floor(Math.random() * randomMessage.length)]
-      createJutsu msg, numberOfSeals, (message) -> msg.send message
+      createJutsu(msg, numberOfSeals)
 
   robot.respond /(kill|destroy|attack) (.+)/i, (msg) ->
     numberOfSeals = Math.floor(Math.random() * 3) + 3 # minimum 3, max 6
-    createJutsu msg, numberOfSeals, (message) -> msg.send message
+    createJutsu(msg, numberOfSeals)
 
-createJutsu = (msg, numberOfSeals, message) ->
+createJutsu = (msg, numberOfSeals) ->
   jutsu = []
   output = []
   post = []
@@ -61,13 +61,13 @@ createJutsu = (msg, numberOfSeals, message) ->
       upload.on 'exit', (code) ->
         if code == 0
           msg.send (sealNames[seal.name] for seal in jutsu).join(' ')
-          message post[0].upload.links.original
+          msg.send post[0].upload.links.original
         else
           msg.send output.join(' ')
-          message "There was a problem posting the jutsu."
+          msg.send "There was a problem posting the jutsu."
     else
       msg.send output.join(' ')
-      message "There was a problem building the jutsu."
+      msg.send "There was a problem building the jutsu."
 
 sealNames =
   rat: 'Ne'
