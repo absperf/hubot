@@ -15,8 +15,8 @@ yelp = require('yelp').createClient(
 )
 
 module.exports = (robot) ->
-  robot.respond /(.+) (food|restaurant) (at|in|near|by|around|close to) (.*)/i, (msg) ->
-    filter = msg[1]
+  robot.respond /(.+) (food|lunch|restaurant) (at|in|near|by|around|close to) (.*)/i, (msg) ->
+    filter = msg.match[1]
 
     if filter == 'random'
       filter = 'bagels,bakeries,breweries,desserts,foodtrucks,gourmet,streetvendors,restaurants'
