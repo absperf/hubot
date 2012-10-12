@@ -13,8 +13,7 @@ spawn = require('child_process').spawn
 module.exports = (robot) ->
 
   robot.enter (msg) ->
-    name = msg.message.user.name.split(' ')
-    if name == 'Tim Shirley'
+    if msg.message.user.name == 'Tim Shirley'
       randomMessage = [
         "Tim, would you like to dance?",
         "Go ahead Tim, make my day.",
