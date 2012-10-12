@@ -5,13 +5,27 @@
 # Commands:
 #   hubot [kill|destroy|attack] [name]
 
-
 imgur = 'http://api.imgur.com/2/upload.json'
 dir = '/home/ubuntu/seals'
 
 spawn = require('child_process').spawn
 
 module.exports = (robot) ->
+
+  robot.enter (msg) ->
+    name = msg.message.user.name.split(' ')
+    if name == 'Tim Shirley'
+      randomMessage = [
+        "Tim, would you like to dance?",
+        "Go ahead Tim, make my day.",
+        'Tim! My old nemesis!',
+        "It's Tim, GET HIM!!",
+        "Time to die, Tim!",
+        "Tim, when we last met I was but a student... but now /I/ am the master!"
+      ]
+      msg.send randomMessage[Math.floor(Math.random() * randomMessage.length)]
+      createJutsu msg, numberOfSeals, (message) -> msg.send message
+
   robot.respond /(kill|destroy|attack) (.+)/i, (msg) ->
     numberOfSeals = Math.floor(Math.random() * 3) + 3 # minimum 3, max 6
     createJutsu msg, numberOfSeals, (message) -> msg.send message
@@ -25,7 +39,6 @@ createJutsu = (msg, numberOfSeals, message) ->
     name = seals[Math.floor(Math.random() * 12)]
     file = "#{dir}/#{name}.gif"
     jutsu.push name: name, file: file
-
 
   command = ["gm convert -loop 100"]
   for seal in jutsu
@@ -48,13 +61,13 @@ createJutsu = (msg, numberOfSeals, message) ->
       upload.on 'exit', (code) ->
         if code == 0
           msg.send (sealNames[seal.name] for seal in jutsu).join(' ')
-          msg.send post[0].upload.links.original
+          message post[0].upload.links.original
         else
           msg.send output.join(' ')
-          msg.send "There was a problem posting the jutsu."
+          message "There was a problem posting the jutsu."
     else
       msg.send output.join(' ')
-      msg.send "There was a problem building the jutsu."
+      message "There was a problem building the jutsu."
 
 sealNames =
   rat: 'Ne'
