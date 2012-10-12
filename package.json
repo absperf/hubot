@@ -22,6 +22,7 @@
     "connect": "2.3.4",
     "connect_router": "1.8.6",
     "redis": "0.7.2",
+    "yelp": "0.1.1",
     "xml2js": ""
   },
 
