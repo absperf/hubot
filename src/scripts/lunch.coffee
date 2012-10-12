@@ -15,9 +15,6 @@ yelp = require('yelp').createClient(
 )
 
 module.exports = (robot) ->
-  robot.respond /where (do you think|should) (we|i)? (eat|have lunch|munch)/i, (msg) ->
-
-module.exports = (robot) ->
   robot.respond /(.+) (food|restaurant) (at|in|near|by|around|close to) (.*)/i, (msg) ->
     filter = msg[1]
 
@@ -34,5 +31,6 @@ module.exports = (robot) ->
         if data.businesses.length > 0
           business = data.businesses[Math.floor(Math.random() * data.businesses.length) - 1]
 
-          msg.send "#{business.name} at #{business.location.address} (rated: #{business.rating}/5 by #{business.review_count}}people.)"
-          msg.send business.url
+          msg.send "#{business.name} at #{business.location.address} (rated: #{business.rating}/5 by #{business.review_count} people.)"
+
+          setTimeout (-> msg.send business.url), 2000

@@ -5,7 +5,7 @@
 #   hubot where is the taco truck
 
 module.exports = (robot) ->
-  robot.respond /(where is|find( me)? the)?\s?taco truck(\?)?/i, (msg) ->
+  robot.respond /(where is) the taco truck(\?)?/i, (msg) ->
     findTacoTruck msg
 
 findTacoTruck = (msg) ->
