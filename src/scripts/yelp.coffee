@@ -15,7 +15,7 @@ module.exports = (robot) ->
   robot.respond /(suggestion|recommendation) category list/i, (msg) ->
     url = 'http://www.yelp.com/developers/documentation/category_list'
 
-    help_text = ['The category names are in parenthesis:']
+    help_text = ['The category names are in parentheses:']
     help_text.push '      Chicken Wings (chicken_wings)'
     help_text.push '      Indian        (indpak)'
     help_text.push 'Parent categories include the child categories:'
