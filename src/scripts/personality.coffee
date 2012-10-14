@@ -10,21 +10,19 @@ module.exports = (robot) ->
   robot.enter (msg) ->
     name = msg.message.user.name.split(' ')
     name = name[0] if name.length > 1
-
-    randomMessage msg, greetings(name), 5, (message) -> msg.send message
+    message = greetings(name)
+    randomMessage(msg, message, 5)
 
   robot.hear /(https?:\/\/[^\s]+)|(.+\.(png|gif|jpe?g))/i, (msg) ->
-    randomMessage msg, exclamations , 5, (message) -> msg.send message
+    randomMessage(msg, exclamations , 5)
 
-  robot.respond /i\slove\syou/i, (msg) ->
-    randomMessage msg, loves, 1, (message) -> msg.send message
+  robot.respond /i love you/i, (msg) ->
+    randomMessage(msg, loves, 1)
 
-randomMessage = (msg, messages, multiplier, message) ->
+randomMessage = (msg, messages, multiplier) ->
   randomNumber = Math.floor(Math.random() * messages.length) * multiplier
-  if randomNumber <= message.length
-    message messages[randomNumber - 1]
-
-
+  if randomNumber <= messages.length
+    msg.send messages[randomNumber]
 
 greetings = (name) ->
   [ "Hello #{name}.",
