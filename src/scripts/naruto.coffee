@@ -12,20 +12,6 @@ spawn = require('child_process').spawn
 
 module.exports = (robot) ->
 
-  robot.enter (msg) ->
-    if msg.message.user.name == 'Tim Shirley'
-      randomMessage = [
-        "Tim, would you like to dance?",
-        "Go ahead Tim, make my day.",
-        'Tim! My old nemesis!',
-        "It's Tim, GET HIM!!",
-        "Time to die, Tim!",
-        "Tim, when we last met I was but a student... but now /I/ am the master!"
-      ]
-      msg.send randomMessage[Math.floor(Math.random() * randomMessage.length)]
-      numberOfSeals = Math.floor(Math.random() * 3) + 3 # minimum 3, max 6
-      createJutsu(msg, numberOfSeals)
-
   robot.respond /(kill|destroy|attack) (.+)/i, (msg) ->
     numberOfSeals = Math.floor(Math.random() * 3) + 3 # minimum 3, max 6
     createJutsu(msg, numberOfSeals)
