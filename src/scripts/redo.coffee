@@ -15,7 +15,7 @@ module.exports = (robot) ->
       robot.receive msg['message']
       msg['message']['done'] = true
     else
-      msg.send "i don't remember hearing anything."
+      msg.send "I don't have a stored command that I can execute."
 
 store = (command) ->
   exports.last_command = command unless command.match /(!!|last command|redo)/
