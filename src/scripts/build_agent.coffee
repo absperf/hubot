@@ -79,7 +79,7 @@ module.exports = (robot) ->
           msg.send output.join("\n")
           msg.send "Sorry, but I couldn't build the #{platform} agent installer."
 
-        buildLinux(msg, 'x64') unless arch == 'x64'
+        buildLinux(msg, 'x86_64') unless arch == 'x86_64'
 
     # Runs chef solo to build and upload the installer.
     buildWindows = (msg) ->
