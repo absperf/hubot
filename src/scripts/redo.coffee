@@ -11,12 +11,8 @@ module.exports = (robot) ->
   robot.respond /(!!|last command|redo)/i, (msg) ->
 
     if exports.last_command?
-      msg.send exports.last_command
-
       msg['message']['text'] = "smith #{exports.last_command}"
-
       robot.receive msg['message']
-
       msg['message']['done'] = true
     else
       msg.send "i don't remember hearing anything."
