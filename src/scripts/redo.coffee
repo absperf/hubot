@@ -2,7 +2,7 @@
 #   Repeats the previous command directed at Smith.
 #
 # Commands:
-#   hubut [!!|last command|redo]
+#   smith [!!|last command|redo]
 
 module.exports = (robot) ->
   robot.respond /(.+)/i, (msg) ->
