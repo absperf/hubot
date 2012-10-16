@@ -1,9 +1,12 @@
 # Description
 #   Returns a random business/restaurant/service.
 #
+# Dependencies:
+#   "yelp": "0.1.1"
+#
 # Commands:
 #   hubot [suggestion|recommendation] category list
-#   hubot [suggest|recommend|find] [random|category] [at|in|near|by] [location]
+#   hubot [suggest|recommend] [random|category] [at|in|near|by] [location]
 
 yelp = require('yelp').createClient(
   consumer_key: process.env.YELP_CONSUMER_KEY
@@ -25,7 +28,7 @@ module.exports = (robot) ->
     msg.send help_text.join("\n")
     setTimeout (-> msg.send url), 2000
 
-  robot.respond /(find|recommend|suggest) (.+) (at|in|near|by) (.*)/i, (msg) ->
+  robot.respond /(suggest|recommend) (.+) (at|in|near|by) (.*)/i, (msg) ->
     filter = if filter == 'random' then '' else msg.match[2]
     location = msg.match[4]
 
