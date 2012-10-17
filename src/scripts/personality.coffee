@@ -11,7 +11,7 @@ sudoers = [625437, 871643, 889137, 599431]
 module.exports = (robot) ->
 
   robot.respond /(sudo )? make me a sandwich/i, (msg) ->
-    if msg.message.user.id in sudoers
+    if msg.match[1] && msg.message.user.id in sudoers
       msg.send "Okay, making you a sandwich."
     else
       msg.send 'No.'
