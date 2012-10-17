@@ -43,8 +43,9 @@ module.exports = (robot) ->
         else
           sendStories(msg, json.iteration.stories)
   
-  robot.respond /add\s+(bug|feature|chore)\s+(.+)/, (msg) ->
+  robot.respond /add\s+(bug|story|feature|chore)\s+(.+)/, (msg) ->
     storyType = msg.match[1]
+    storyType = 'feature' if storyType == 'story'
     story = msg.match[2]
     sender = msg.message.user.name
 
