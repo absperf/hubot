@@ -7,8 +7,8 @@ spawn = require('child_process').spawn
 
 exports.deploy_password = {}
 
-sudoers = ['Gino', 'Adam', 'Joanne', 'Erik', 'Shell']
-unprotected = ['ops-proc01', 'ops-db01']
+sudoers = ['Gino', 'Adam', 'Joanne', 'Erik']
+unprotected = ['ops-proc01', 'ops-proc02']
 # unprotected = ['ops-proc01', 'ops-proc02', 'ops-db01']
 
 hostList =
