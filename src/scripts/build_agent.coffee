@@ -1,8 +1,7 @@
 # Build the System Shepherd Agent installer.
 #
 # Commands:
-#   hubot build windows agent - Build the Windows agent installer and upload it to S3
-#   hubot build linux agent - Build the Linix agent installer and upload it to S3
+#   hubot build [windows|linux] [branch] agent - Build the agent installer and upload it to S3
 
 spawn = require('child_process').spawn
 fs = require('fs')
