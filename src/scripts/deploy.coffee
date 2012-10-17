@@ -53,7 +53,7 @@ targetList =
   'ssint2-db03': ['ssint2-db03']
   'ssint2-db04': ['ssint2-db04']
   'ssint2-dbs': ['ssint2-db01', 'ssint2-db02', 'ssint2-db03', 'ssint2-db04']
-  'ssint2': [['ssint2-db01', 'ssint2-db02', 'ssint2-db03', 'ssint2-db04', 'ssint2-proc01', 'ssint2-proc02', 'ssint2-proc03', 'ssint2-proc04', 'ssint2-proc05', 'ssint2-proc06']]
+  'ssint2': ['ssint2-db01', 'ssint2-db02', 'ssint2-db03', 'ssint2-db04', 'ssint2-proc01', 'ssint2-proc02', 'ssint2-proc03', 'ssint2-proc04', 'ssint2-proc05', 'ssint2-proc06']
   'qapp06-proc01': ['qapp06-proc01']
   'qapp06-proc02': ['qapp06-proc02']
   'qapp06-procs': ['qapp06-proc01', 'qapp06-proc02']
