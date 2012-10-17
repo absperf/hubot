@@ -7,20 +7,66 @@ spawn = require('child_process').spawn
 
 exports.deploy_password = {}
 
-sudoers = ['Gino', 'Adam', 'Joanne', 'Erik']
-unprotected = ['ops-proc01', 'ops-proc02']
+sudoers = [625437, 871643, 889137, 'Erik']
+unprotected = ['ops-proc01', 'ops-db01']
 # unprotected = ['ops-proc01', 'ops-proc02', 'ops-db01']
 
 hostList =
   'ops-db01': '172.18.0.121'
   'ops-proc01': '172.18.0.131'
   'ops-proc02': '172.18.0.132'
+  'ssint2-proc01': '172.18.0.31'
+  'ssint2-proc02': '172.18.0.32'
+  'ssint2-proc03': '172.18.0.33'
+  'ssint2-proc04': '172.18.0.34'
+  'ssint2-proc05': '172.18.0.35'
+  'ssint2-proc06': '172.18.0.36'
+  'ssint2-db01': '172.18.0.13'
+  'ssint2-db02': '172.18.0.17'
+  'ssint2-db03': '172.18.0.19'
+  'ssint2-db04': '172.18.0.24'
+  'qapp06-proc01': '172.17.10.18'
+  'qapp06-proc02': '172.17.10.19'
+  'qapp06-db01':   '172.17.10.16'
+  'qapp06-db02':   '172.17.10.22'
+  'qapp06-db03':   '172.17.10.11'
+  'aj-db01':     '192.168.31.21'
+  'aj-proc01':  '192.168.31.31'
+  'aj-poll01':   '192.168.31.51'
 
 targetList =
   'ops-proc01': ['ops-proc01']
   'ops-proc02': ['ops-proc02']
+  'ops-procs': ['ops-proc01', 'ops-proc02']
   'ops-db01': ['ops-db01']
+  'ops-dbs': ['ops-db01']
   'ops': ['ops-db01', 'ops-proc01', 'ops-proc02']
+  'ssint2-proc01': ['ssint2-proc01']
+  'ssint2-proc02': ['ssint2-proc02']
+  'ssint2-proc03': ['ssint2-proc03']
+  'ssint2-proc04': ['ssint2-proc04']
+  'ssint2-proc05': ['ssint2-proc05']
+  'ssint2-proc06': ['ssint2-proc06']
+  'ssint2-procs': ['ssint2-proc01', 'ssint2-proc02', 'ssint2-proc03', 'ssint2-proc04', 'ssint2-proc05', 'ssint2-proc06']
+  'ssint2-db01': ['ssint2-db01']
+  'ssint2-db02': ['ssint2-db02']
+  'ssint2-db03': ['ssint2-db03']
+  'ssint2-db04': ['ssint2-db04']
+  'ssint2-dbs': ['ssint2-db01', 'ssint2-db02', 'ssint2-db03', 'ssint2-db04']
+  'ssint2': [['ssint2-db01', 'ssint2-db02', 'ssint2-db03', 'ssint2-db04', 'ssint2-proc01', 'ssint2-proc02', 'ssint2-proc03', 'ssint2-proc04', 'ssint2-proc05', 'ssint2-proc06']]
+  'qapp06-proc01': ['qapp06-proc01']
+  'qapp06-proc02': ['qapp06-proc02']
+  'qapp06-procs': ['qapp06-proc01', 'qapp06-proc02']
+  'qapp06-db01': ['qapp06-db01']
+  'qapp06-db02': ['qapp06-db02']
+  'qapp06-db03': ['qapp06-db03']
+  'qapp06-dbs': ['qapp06-db01', 'qapp06-db02', 'qapp06-db03' ]
+  'qapp06': ['qapp06-db01', 'qapp06-db02', 'qapp06-db03', 'qapp06-proc01', 'qapp06-proc02' ]
+  'aj-proc01': ['aj-proc01']
+  'aj-procs': ['aj-proc01']
+  'aj-db01': ['aj-db01']
+  'aj-dbs': ['ajdb01']
+  'aj': ['aj-db01', 'aj-proc01']
 
 initPassword = (time, passwordHash = {})->
   exports.deploy_password = passwordHash
@@ -39,26 +85,18 @@ generatePassword = (target) ->
 module.exports = (robot) ->
 
   robot.hear /(.+)/, (msg) ->
-    name = msg.message.user.name.split(' ')
-    name = name[0]
     target = exports.deploy_password[msg.match[0]]
-
-    if target && name in sudoers
+    if target && msg.message.user.id in sudoers
       initPassword 0
       deploy msg, target
 
   robot.respond /(sudo )?(ship|deploy) (.*)/i, (msg) ->
-    name = msg.message.user.name.split(' ')
-    name = name[0]
-
     target = msg.match[3]
-
     if targetList[target]?
       if target in unprotected
         deploy msg, target
-
       else if msg.match[1]
-        if name in sudoers
+        if msg.message.user.id in sudoers
           msg.send "Please enter the generated password to deploy to #{target}."
           msg.send "This password will expire in 20 seconds:  #{generatePassword(target)}"
         else
