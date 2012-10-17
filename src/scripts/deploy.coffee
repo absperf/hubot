@@ -5,7 +5,7 @@
 
 spawn = require('child_process').spawn
 
-exports.deploy_password = {}
+exports.deploy_captcha = {}
 
 sudoers = [625437, 871643, 889137, 'Erik']
 unprotected = ['ops-proc01', 'ops-db01']
@@ -68,26 +68,26 @@ targetList =
   'aj-dbs': ['ajdb01']
   'aj': ['aj-db01', 'aj-proc01']
 
-initPassword = (time, passwordHash = {})->
-  exports.deploy_password = passwordHash
-  setTimeout (-> exports.deploy_password = {}), time
+initCaptcha = (time, captchaHash = {})->
+  exports.deploy_captcha = captchaHash
+  setTimeout (-> exports.deploy_captcha = {}), time
 
-generatePassword = (target) ->
+generateCaptcha = (target) ->
   alphanum = 'abcdefghijklmnopqrstuvwxyz0123456789'.split('')
   alphanum = alphanum.sort(-> Math.floor(Math.random() * alphanum.length))
-  password = alphanum.reverse().join('').match(/\D.+$/)[0][0..7]
+  captcha = alphanum.reverse().join('').match(/\D.+$/)[0][0..7]
 
-  passwordHash = {}
-  passwordHash[password] = target
-  initPassword 20000, passwordHash
-  password
+  captchaHash = {}
+  captchaHash[captcha] = target
+  initCaptcha 20000, captchaHash
+  captcha
 
 module.exports = (robot) ->
 
   robot.hear /(.+)/, (msg) ->
-    target = exports.deploy_password[msg.match[0]]
+    target = exports.deploy_captcha[msg.match[0]]
     if target && msg.message.user.id in sudoers
-      initPassword 0
+      initCaptcha 0
       deploy msg, target
 
   robot.respond /(sudo )?(ship|deploy) (.*)/i, (msg) ->
@@ -97,8 +97,8 @@ module.exports = (robot) ->
         deploy msg, target
       else if msg.match[1]
         if msg.message.user.id in sudoers
-          msg.send "Please enter the generated password to deploy to #{target}."
-          msg.send "This password will expire in 20 seconds:  #{generatePassword(target)}"
+          msg.send "Please enter the generated captcha to deploy to #{target}."
+          msg.send "This captcha will expire in 20 seconds:  #{generateCaptcha(target)}"
         else
           msg.send "You don't have permission to deploy to protected SystemShepherd nodes."
       else
