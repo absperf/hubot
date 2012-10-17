@@ -4,17 +4,18 @@
 #   hubot build windows agent - Build the Windows agent installer and upload it to S3
 #   hubot build linux agent - Build the Linix agent installer and upload it to S3
 
-module.exports = (robot) ->
-  robot.respond /build( the)? (windows|linux) (agent|installer)$/i, (msg) ->
+spawn = require('child_process').spawn
+fs = require('fs')
 
+module.exports = (robot) ->
+  robot.respond /build( the)? (windows|linux) (master|edge) (agent|installer)$/i, (msg) ->
     platform = msg.match[2]
-    spawn = require('child_process').spawn
-    fs = require('fs')
+    branch = msg.match[3]
 
     workingCopy = "/home/ubuntu/jruby-agent-#{platform}"
     output = []
 
-    msg.send "I'll get started building the #{platform} agent installer."
+    msg.send "I'll get started building the #{platform}(#{branch}) agent installer."
 
     # Updates the jruby-agent working copy. Either does a clone or a pull
     # depending on whether or not the working copy exists.
@@ -69,7 +70,7 @@ module.exports = (robot) ->
           msg.send "Sorry, but I couldn't run `bundle install` in the jruby-agent-#{platform} repo:"
 
     buildLinux = (msg, arch) ->
-      rake = spawn('bundle', ['exec', 'rake', "build_and_upload:#{arch}"], { cwd: workingCopy })
+      rake = spawn('bundle', ['exec', 'rake', "build:#{branch}:#{arch}:upload"], { cwd: workingCopy })
       rake.stdout.on 'data', (data) -> output.push(data)
       rake.stderr.on 'data', (data) -> output.push(data)
       rake.on 'exit', (code) ->
