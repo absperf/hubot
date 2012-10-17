@@ -7,7 +7,7 @@ spawn = require('child_process').spawn
 
 exports.deploy_captcha = {}
 
-sudoers = [625437, 871643, 889137, 'Erik']
+sudoers = [625437, 871643, 889137, 599431]
 unprotected = ['ops-proc01', 'ops-db01']
 # unprotected = ['ops-proc01', 'ops-proc02', 'ops-db01']
 
