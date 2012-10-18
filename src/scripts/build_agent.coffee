@@ -74,7 +74,7 @@ module.exports = (robot) ->
       rake.stderr.on 'data', (data) -> output.push(data)
       rake.on 'exit', (code) ->
         if code == 0
-          msg.send "The #{platform} #{arch} agent installer has been built and uploaded to s3 at https://s3.amazonaws.com/agent-dist/latest/agent-linux-#{arch}.sh"
+          msg.send "The #{platform} #{arch} agent installer has been built and uploaded to s3 at https://s3.amazonaws.com/agent-dist/latest/agent-linux-#{arch}#{'-dev' if branch == 'edge'}.sh"
         else
           msg.send output.join("\n")
           msg.send "Sorry, but I couldn't build the #{platform} agent installer."
