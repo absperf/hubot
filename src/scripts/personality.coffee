@@ -40,12 +40,11 @@ greetings = (name) ->
     "What's up, #{name}?",
     "Greetings, #{name}.",
     "Buongiorno, #{name}.",
-    "Bonjour, #{name}."
+    "Bonjour, #{name}.",
     "Hola, #{name}.",
     "Aloha, #{name}.",
     "#{name}! Just the person we need!",
-    "Heeeeeeeeeere's #{name}!",
-    "Draw me like one of your French girls, #{name}" ]
+    "Heeeeeeeeeere's #{name}!"]
 
 exclamations = [
   'Wooooooo!',
