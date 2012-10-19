@@ -9,7 +9,7 @@ Sudo = require('./sudo')
 module.exports = (robot) ->
   sudo = new Sudo(robot)
 
-  sudo.respond '(ship|deploy) (.*)', (msg) ->
+  sudo.respond /(ship|deploy) (.*)/i, (msg) ->
     target = msg.match[2]
     if targetList[target]?
       deploy msg, target

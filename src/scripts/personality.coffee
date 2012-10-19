@@ -12,7 +12,7 @@ module.exports = (robot) ->
 
   sudo = new Sudo(robot)
 
-  sudo.respond 'make me a sandwich', (msg) ->
+  sudo.respond /make me a sandwich/, (msg) ->
     name = msg.message.user.name.split(' ')
     name = name[0] if name.length > 1
     msg.send "Okay #{name}, I'm making you a sandwich."
