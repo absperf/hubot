@@ -12,7 +12,7 @@ class Sudo
 
   respond: (string, execute) =>
     # create a responder for commands that require sudo
-    @robot.respond string, (msg) =>
+    @robot.respond RegExp("#{string.source}"), (msg) =>
       msg.send 'This is a protected command, please use sudo.'
       msg['message']['done'] = true
 
