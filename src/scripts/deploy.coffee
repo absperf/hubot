@@ -42,8 +42,7 @@ module.exports = (robot) ->
       unless code == 0
         msg.send "There was an error deploying on #{target}: Code #{code}"
 
-  unprotected = ['ops-proc01', 'ops-db01']
-  # unprotected = ['ops-proc01', 'ops-proc02', 'ops-db01']
+  unprotected = ['ops', 'ops-proc01', 'ops-proc02', 'ops-db01']
 
   hostList =
     'ops-db01': '172.18.0.121'
