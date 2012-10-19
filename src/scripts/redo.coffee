@@ -17,10 +17,9 @@ module.exports = (robot) ->
   # repeat the last command directed at smith
   robot.respond /(!!|redo)/i, (msg) ->
     if exports.lastCommand?
-      msg.send exports.lastCommand
       msg.message.text = "smith #{exports.lastCommand}"
       robot.receive msg.message
-      msg.messsage.done = true
+      msg['message']['done'] = true
     else
       msg.send "I don't have a stored command that I can execute."
 
