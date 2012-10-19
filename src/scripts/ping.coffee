@@ -16,7 +16,7 @@ module.exports = (robot) ->
   sudo.respond 'authentication test', (msg) ->
     name = msg.message.user.name.split(' ')
     name = name[0] if name.length > 1
-    console.log "Congrats #{name}, you are a member of the sudoers group!"
+    msg.send "Congrats #{name}, you are a member of the sudoers group!"
 
   robot.respond /PING$/i, (msg) ->
     msg.send "PONG"
