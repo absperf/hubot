@@ -10,19 +10,20 @@ class Sudo
     #           Gino    Adam    Joanne  Erik   Shell
     @sudoers = [625437, 871643, 889137, 599431, '1']
 
-  respond: (string, execute) =>
-    # create a responder for commands that require sudo
-    @robot.respond RegExp("#{string.source}"), (msg) =>
-      msg.send 'This is a protected command, please use sudo.'
-      msg['message']['done'] = true
+  respond: (regex, execute) =>
+    # create a responder to deny access to commands without sudo
+    @robot.respond regex, (msg) => @failedCommand msg, execute
 
     # create a responder for successful sudo commands
-    @robot.respond RegExp("sudo #{string.source}"), (msg) =>
+    @robot.respond RegExp("sudo #{regex.source}"), (msg) =>
       @authorizeResponse msg, execute
 
+  failedCommand: (msg, execute) =>
+    msg['message']['done'] = true
+    msg.send 'This is a protected command, please use sudo.'
+
   authorizeResponse: (msg, execute) =>
-    userid = msg.message.user.id
-    if userid in @sudoers
+    if msg.message.user.id in @sudoers
       msg['message']['done'] = true
       execute msg
 
