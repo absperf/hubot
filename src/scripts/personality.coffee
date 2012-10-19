@@ -31,17 +31,17 @@ module.exports = (robot) ->
     if randomNumber <= messages.length
       msg.send messages[randomNumber]
 
-greetings = (name) ->
-  [ "Hello #{name}.",
-    "Hi, #{name}, how's it going?",
-    "What's up, #{name}?",
-    "Greetings, #{name}.",
-    "Buongiorno, #{name}.",
-    "Bonjour, #{name}.",
-    "Hola, #{name}.",
-    "Aloha, #{name}.",
-    "#{name}! Just the person we need!",
-    "Heeeeeeeeeere's #{name}!"]
+  greetings = (name) ->
+    [ "Hello #{name}.",
+      "Hi, #{name}, how's it going?",
+      "What's up, #{name}?",
+      "Greetings, #{name}.",
+      "Buongiorno, #{name}.",
+      "Bonjour, #{name}.",
+      "Hola, #{name}.",
+      "Aloha, #{name}.",
+      "#{name}! Just the person we need!",
+      "Heeeeeeeeeere's #{name}!"]
 
   exclamations = [
     'Wooooooo!',
