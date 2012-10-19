@@ -9,18 +9,6 @@ Sudo = require('./sudo')
 module.exports = (robot) ->
   sudo = new Sudo(robot)
 
-  robot.respond /(ship|deploy) (.*)/i, (msg) ->
-    target = msg.match[2]
-    if targetList[target]?
-      if target in unprotected
-        msg.message.done = true
-        deploy msg, target
-    else
-      msg.message.done = true
-      targets = for key, value of targetList
-        key
-      msg.send "That is not a valid deploy target. (#{targets.join(', ')})"
-
   sudo.respond '(ship|deploy) (.*)', (msg) ->
     target = msg.match[2]
     if targetList[target]?
@@ -41,8 +29,6 @@ module.exports = (robot) ->
     runchef.on "exit", (code) ->
       unless code == 0
         msg.send "There was an error deploying on #{target}: Code #{code}"
-
-  unprotected = ['ops', 'ops-proc01', 'ops-proc02', 'ops-db01']
 
   hostList =
     'ops-db01': '172.18.0.121'
