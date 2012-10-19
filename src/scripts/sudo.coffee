@@ -12,7 +12,8 @@ class Sudo
 
   respond: (regex, execute) =>
     # create a responder to deny access to commands without sudo
-    @robot.respond regex, (msg) => @failedCommand msg, execute
+    @robot.respond RegExp("#{regex.source}"), (msg) =>
+      @failedCommand msg, execute
 
     # create a responder for successful sudo commands
     @robot.respond RegExp("sudo #{regex.source}"), (msg) =>
