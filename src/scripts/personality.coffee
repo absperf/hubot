@@ -6,16 +6,16 @@
 # Commands:
 #   None
 
-sudoers = [625437, 871643, 889137, 599431]
+Sudo = require('./sudo')
 
 module.exports = (robot) ->
 
-  robot.respond /(sudo )? make me a sandwich/i, (msg) ->
-    sudo = msg.match[1] == 'sudo '
-    if sudo && msg.message.user.id in sudoers
-      msg.send "Okay, making you a sandwich."
-    else
-      msg.send 'No.'
+  sudo = new Sudo(robot)
+
+  sudo.respond 'make me a sandwich', (msg) ->
+    name = msg.message.user.name.split(' ')
+    name = name[0] if name.length > 1
+    msg.send "Okay #{name}, I'm making you a sandwich."
 
   robot.enter (msg) ->
     name = msg.message.user.name.split(' ')
@@ -29,10 +29,10 @@ module.exports = (robot) ->
   robot.respond /i love you/i, (msg) ->
     randomMessage(msg, loves, 1)
 
-randomMessage = (msg, messages, multiplier) ->
-  randomNumber = Math.floor(Math.random() * messages.length) * multiplier
-  if randomNumber <= messages.length
-    msg.send messages[randomNumber]
+  randomMessage = (msg, messages, multiplier) ->
+    randomNumber = Math.floor(Math.random() * messages.length) * multiplier
+    if randomNumber <= messages.length
+      msg.send messages[randomNumber]
 
 greetings = (name) ->
   [ "Hello #{name}.",
@@ -46,19 +46,19 @@ greetings = (name) ->
     "#{name}! Just the person we need!",
     "Heeeeeeeeeere's #{name}!"]
 
-exclamations = [
-  'Wooooooo!',
-  'Wow!',
-  'Nice!',
-  'Awesome!',
-  'Whoa!',
-  'Sweet!',
-  'Neat!',
-  'Daaaaaaaamn!' ]
+  exclamations = [
+    'Wooooooo!',
+    'Wow!',
+    'Nice!',
+    'Awesome!',
+    'Whoa!',
+    'Sweet!',
+    'Neat!',
+    'Daaaaaaaamn!' ]
 
-loves = [
-  "I love you too!",
-  "Awww, right back 'atcha!",
-  "I love you but I'm not /in/ love with you.",
-  "Can't we just be friends?",
-  "What's love got to do with it?" ]
+  loves = [
+    "I love you too!",
+    "Awww, right back 'atcha!",
+    "I love you but I'm not /in/ love with you.",
+    "Can't we just be friends?",
+    "What's love got to do with it?" ]
