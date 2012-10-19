@@ -26,9 +26,6 @@ module.exports = (robot) ->
   robot.hear /(https?:\/\/[^\s]+)|(.+\.(png|gif|jpe?g))/i, (msg) ->
     randomMessage(msg, exclamations , 5)
 
-  robot.respond /i love you/i, (msg) ->
-    randomMessage(msg, loves, 1)
-
   randomMessage = (msg, messages, multiplier) ->
     randomNumber = Math.floor(Math.random() * messages.length) * multiplier
     if randomNumber <= messages.length
@@ -56,9 +53,3 @@ greetings = (name) ->
     'Neat!',
     'Daaaaaaaamn!' ]
 
-  loves = [
-    "I love you too!",
-    "Awww, right back 'atcha!",
-    "I love you but I'm not /in/ love with you.",
-    "Can't we just be friends?",
-    "What's love got to do with it?" ]
