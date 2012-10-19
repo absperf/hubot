@@ -27,6 +27,8 @@ class Sudo
     if msg.message.user.id in @sudoers
       msg['message']['done'] = true
       execute msg
+    else
+      msg.send "You do not have permission to execute that command."
 
 module.exports = Sudo
 
