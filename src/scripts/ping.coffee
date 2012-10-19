@@ -2,6 +2,7 @@
 #   Utility commands surrounding Hubot uptime.
 #
 # Commands:
+#   hubot authentication test -  verify that you are a member of the sudoers group
 #   hubot ping - Reply with pong
 #   hubot echo [text] - Reply back with [text]
 #   hubot time - Reply with current time
