@@ -3,12 +3,19 @@
 #   sudo [command]
 #     Execute the protected command.
 
+
+defaultSudoers = [
+  process.env.GINO_ID,
+  process.env.ADAM_ID,
+  process.env.JOANNE_ID,
+  process.env.ERIK_ID,
+  '1'] # Shell is the string '1' :\
+
 class Sudo
 
-  constructor: (robot) ->
+  constructor: (robot, sudoers = defaultSudoers) ->
     @robot = robot
-    #           Gino    Adam    Joanne  Erik   Shell
-    @sudoers = [625437, 871643, 889137, 599431, '1']
+    @sudoers = sudoers
 
   respond: (regex, execute) =>
     # create a responder to deny access to commands without sudo
@@ -24,7 +31,7 @@ class Sudo
     msg.send 'This is a protected command, please use sudo.'
 
   authorizeResponse: (msg, execute) =>
-    if msg.message.user.id in @sudoers
+    if "#{msg.message.user.id}" in @sudoers
       msg['message']['done'] = true
       execute msg
     else
