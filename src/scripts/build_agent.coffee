@@ -74,23 +74,23 @@ module.exports = (robot) ->
       rake.stderr.on 'data', (data) -> output.push(data)
       rake.on 'exit', (code) ->
         if code == 0
-          msg.send "The #{platform} #{arch} agent installer has been built and uploaded to s3 at https://s3.amazonaws.com/agent-dist/latest/agent-linux-#{arch}#{'-dev' if branch == 'edge'}.sh"
+          msg.send "The #{platform} #{arch}(#{branch}) agent installer has been built and uploaded to s3 at https://s3.amazonaws.com/agent-dist/latest/agent-linux-#{arch}#{'-dev' if branch == 'edge'}.sh"
         else
           msg.send output.join("\n")
-          msg.send "Sorry, but I couldn't build the #{platform} agent installer."
+          msg.send "Sorry, but I couldn't build the #{platform} #{arch}(#{branch}) agent installer."
 
         buildLinux(msg, 'x86_64') unless arch == 'x86_64'
 
     # Runs chef solo to build and upload the installer.
     buildWindows = (msg) ->
-      chef = spawn('sudo', ['chef-solo', '-c', "#{workingCopy}/chef/solo.rb", '-j', "#{workingCopy}/chef/solo.json"], { cwd :workingCopy })
+      chef = spawn('sudo', ['chef-solo', '-c', "#{workingCopy}/chef/solo.rb", '-j', "#{workingCopy}/chef/#{branch}-solo.json"], { cwd :workingCopy })
       chef.stdout.on 'data', (data) -> output.push(data)
       chef.stderr.on 'data', (data) -> output.push(data)
       chef.on 'exit', (code) ->
         if code == 0
-          msg.send "The #{platform} agent installer has been built and uploaded to S3 at https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent.exe."
+          msg.send "The #{platform}(#{branch}) agent installer has been built and uploaded to S3 at https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent.exe."
         else
           msg.send output.join("\n")
-          msg.send "Sorry, but I couldn't build the #{platform} agent installer."
+          msg.send "Sorry, but I couldn't build the #{platform}(#{branch}) agent installer."
 
     updateRepo msg
