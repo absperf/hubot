@@ -50,7 +50,7 @@ module.exports = (robot) ->
     story = msg.match[2]
 
     postData = """<story>
-        <story_type>#{sanitize(story).entityEncode()}</story_type>
+        <story_type>#{sanitize(story).entityDecode()}</story_type>
         <name>#{story}</name><requested_by>Smith</requested_by>
       </story>
       """
