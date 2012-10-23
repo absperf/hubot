@@ -49,7 +49,7 @@ module.exports = (robot) ->
     storyType = 'feature' if storyType == 'story'
     story = msg.match[2]
 
-    postData = "<story><story_type>#{storyType}</story_type><name>#{sanitize.entityEncode(story)}</name><requested_by>Smith</requested_by></story>"
+    postData = "<story><story_type>#{storyType}</story_type><name>#{sanitize(story).entityEncode()}</name><requested_by>Smith</requested_by></story>"
 
     msg.http("http://www.pivotaltracker.com/services/v3/projects/#{projectId}/stories")
       .headers('X-TrackerToken': token, "Content-type": "application/xml")
