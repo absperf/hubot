@@ -6,6 +6,7 @@
 #   hubot add [bug|feature|chore] story
 
 Parser = require("xml2js").Parser
+sanitize = require("validator").sanitize
 
 types = ['done', 'current', 'backlog', 'current_backlog']
 token = process.env.HUBOT_PIVOTAL_TOKEN
@@ -47,16 +48,12 @@ module.exports = (robot) ->
     storyType = msg.match[1]
     storyType = 'feature' if storyType == 'story'
     story = msg.match[2]
-    sender = msg.message.user.name
 
-    users = robot.usersForFuzzyName(sender)
-    user = users[0]
-    user.pivotalUsername = user.pivotalUsername || ""
+    postData = "<story><story_type>#{storyType}</story_type><name>#{sanitize(story).entityEncode()}</name><requested_by>Smith</requested_by></story>"
 
-
-    postData = "<story><story_type>#{storyType}</story_type><name>#{story}</name><requested_by>Smith</requested_by></story>"
-
-    msg.http("http://www.pivotaltracker.com/services/v3/projects/#{projectId}/stories").headers('X-TrackerToken': token, "Content-type": "application/xml").post(postData) (err, res, body) ->
-      sendError(err) if err
+    msg.http("http://www.pivotaltracker.com/services/v3/projects/#{projectId}/stories")
+      .headers('X-TrackerToken': token, "Content-type": "application/xml")
+      .post(postData) (err, res, body) ->
+        sendError(err) if err
 
   
