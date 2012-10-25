@@ -9,6 +9,11 @@ Sudo = require('./sudo')
 module.exports = (robot) ->
   sudo = new Sudo(robot)
 
+  robot.respond /show deploy (targets|list)/i, (msg) ->
+    targets = for key, value of targetList
+      key
+    msg.send targets.join(', ')
+
   sudo.respond /(ship|deploy) (.*)/i, (msg) ->
     target = msg.match[2]
     if targetList[target]?
@@ -65,16 +70,15 @@ module.exports = (robot) ->
     'ssint2-proc05': ['ssint2-proc05']
     'ssint2-proc06': ['ssint2-proc06']
     'ssint2-procs': ['ssint2-proc01', 'ssint2-proc02', 'ssint2-proc03', 'ssint2-proc04', 'ssint2-proc05', 'ssint2-proc06']
-    'ssint2-db03': ['ssint2-dbq03']
-    'ssint2-db04': ['ssint2-dbq04']
+    'ssint2-dbq03': ['ssint2-dbq03']
+    'ssint2-dbq04': ['ssint2-dbq04']
     'ssint2-dbs': ['ssint2-dbq03', 'ssint2-dbq04']
     'qapp06-proc01': ['qapp06-proc01']
     'qapp06-proc02': ['qapp06-proc02']
     'qapp06-procs': ['qapp06-proc01', 'qapp06-proc02']
-    'qapp06-db01': ['qapp06-db01']
     'qapp06-db02': ['qapp06-db02']
     'qapp06-db03': ['qapp06-db03']
-    'qapp06-dbs': ['qapp06-db01', 'qapp06-db02', 'qapp06-db03' ]
+    'qapp06-dbs': ['qapp06-db02', 'qapp06-db03' ]
     'aj-proc01': ['aj-proc01']
     'aj-procs': ['aj-proc01']
     'aj-db01': ['aj-db01']
