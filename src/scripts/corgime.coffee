@@ -7,6 +7,16 @@
 module.exports = (robot) ->
   corgis = [
     'http://24.media.tumblr.com/tumblr_m8w267hQ7V1rvilzwo1_500.jpg',
+    'http://24.media.tumblr.com/tumblr_mcp2lt385f1qg4kaco1_400.gif',
+    'http://25.media.tumblr.com/tumblr_mbmj53ly1J1qk61m3o1_500.gif',
+    'http://25.media.tumblr.com/tumblr_mb0g7rCf7c1qk61m3o1_500.gif',
+    'http://24.media.tumblr.com/tumblr_m9sxb4rfjI1r7ktr7o1_250.gif',
+    'http://25.media.tumblr.com/tumblr_m8xeu5uj371rzfamao1_400.gif',
+    'http://25.media.tumblr.com/tumblr_m02kwhPVyH1qgrs58o1_400.gif',
+    'http://media.tumblr.com/tumblr_m5dv1aFX931qhmds6.gif',
+    'http://25.media.tumblr.com/tumblr_mayuzhhoVK1qiwf8po1_500.gif',
+    'http://25.media.tumblr.com/tumblr_mb1lbcg20g1r6xrn3o1_500.gif',
+    'http://25.media.tumblr.com/tumblr_mapa9pKb4s1qj7fh1o1_250.gif',
     'http://25.media.tumblr.com/tumblr_m8f4f0Qjjz1qiwf8po1_500.jpg',
     'http://25.media.tumblr.com/tumblr_m88olkJ1gj1qbwakso1_500.jpg',
     'http://25.media.tumblr.com/tumblr_m8wqnssMN41qd5j5io1_500.jpg',
