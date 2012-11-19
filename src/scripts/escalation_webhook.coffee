@@ -10,13 +10,11 @@ module.exports = (robot) ->
   robot.router.post '/smith/escalation_hook', (req, res) ->
     body = req.body
     msg = ""
-    console.log body
     for esc in body
-      console.log esc
       msg += "Alert on #{esc.client_name}: #{esc.message} (#{esc.escalation_href})\n"
  
-    robot.messageRoom dev, "Alert: " + msg
-    #robot.messageRoom ops, "Alert: " + msg
+    robot.messageRoom dev, msg
+    robot.messageRoom ops, msg
     res.end "message sent"
 
 
