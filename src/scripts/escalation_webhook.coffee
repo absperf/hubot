@@ -14,7 +14,7 @@ module.exports = (robot) ->
       msg += "Alert on #{esc.client_name}: #{esc.message} (#{esc.escalation_href})\n"
  
     robot.messageRoom dev, "Alert: " + msg
-    robot.messageRoom ops, "Alert: " + msg
+    #robot.messageRoom ops, "Alert: " + msg
     res.end "message sent"
 
 
