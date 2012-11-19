@@ -5,10 +5,11 @@
 #   None
 
 module.exports = (robot) ->
-  room = process.env.OPS
+  dev = process.env.DEV
   robot.router.post '/smith/escalation_hook', (req, res) ->
     body = req.body
     msg = ""
+    console.log req.body
     for esc in body
       msg += "Alert on #{esc.client_name} (#{esc.escalation_href})\n"
  
