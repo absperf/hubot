@@ -29,7 +29,8 @@ module.exports = (robot) ->
     setTimeout (-> msg.send url), 2000
 
   robot.respond /(suggest|recommend) (.+) (at|in|near|by) (.*)/i, (msg) ->
-    filter = if filter == 'random' then '' else msg.match[2]
+    filter = msg.match[2]
+    filter = '' if filter == 'random'
     location = msg.match[4]
 
     query =

@@ -14,7 +14,7 @@ module.exports = (robot) ->
     workingCopy = "/home/ubuntu/jruby-agent-#{platform}"
     output = []
 
-    msg.send "I'll get started building the #{platform}(#{branch}) agent installer."
+    msg.send "I'll get started building the #{branch} #{platform} agent installer."
 
     # Updates the jruby-agent working copy. Either does a clone or a pull
     # depending on whether or not the working copy exists.
@@ -77,20 +77,21 @@ module.exports = (robot) ->
           msg.send "The #{platform} #{arch}(#{branch}) agent installer has been built and uploaded to s3 at https://s3.amazonaws.com/agent-dist/latest/agent-linux-#{arch}#{'-dev' if branch == 'edge'}.sh"
         else
           msg.send output.join("\n")
-          msg.send "Sorry, but I couldn't build the #{platform} #{arch}(#{branch}) agent installer."
+          msg.send "Sorry, but I couldn't build the #{branch} #{platform} #{arch} agent installer."
 
         buildLinux(msg, 'x86_64') unless arch == 'x86_64'
 
     # Runs chef solo to build and upload the installer.
     buildWindows = (msg) ->
-      chef = spawn('sudo', ['bundle', 'exec', 'chef-solo', '-c', "#{workingCopy}/chef/solo.rb", '-j', "#{workingCopy}/chef/#{branch}-solo.json"], { cwd :workingCopy })
+      # chef = spawn('sudo', ['bundle', 'exec', 'chef-solo', '-c', "#{workingCopy}/chef/solo.rb", '-j', "#{workingCopy}/chef/#{branch}-solo.json"], { cwd :workingCopy })
+      chef = spawn('sudo', ['chef-solo', '-c', "#{workingCopy}/chef/solo.rb", '-j', "#{workingCopy}/chef/#{branch}-solo.json"], { cwd :workingCopy })
       chef.stdout.on 'data', (data) -> output.push(data)
       chef.stderr.on 'data', (data) -> output.push(data)
       chef.on 'exit', (code) ->
         if code == 0
-          msg.send "The #{platform}(#{branch}) agent installer has been built and uploaded to S3 at https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent.exe."
+          msg.send "The #{branch} #{platform} agent installer has been built and uploaded to S3 at https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent.exe."
         else
           msg.send output.join("\n")
-          msg.send "Sorry, but I couldn't build the #{platform}(#{branch}) agent installer."
+          msg.send "Sorry, but I couldn't build the #{branch} #{platform} agent installer."
 
     updateRepo msg

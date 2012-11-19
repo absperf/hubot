@@ -9,6 +9,17 @@ Sudo = require('./sudo')
 module.exports = (robot) ->
   sudo = new Sudo(robot)
 
+  robot.respond /show deploy (targets|list)/i, (msg) ->
+    targets = for key, value of targetList
+      key
+    msg.send targets.join(', ')
+
+  robot.respond /(ship|deploy) (.*)/i, (msg) ->
+    target = msg.match[2]
+    if unprotectedHosts[target]?
+      msg['message']['done'] = true
+      deploy msg, target
+
   sudo.respond /(ship|deploy) (.*)/i, (msg) ->
     target = msg.match[2]
     if targetList[target]?
@@ -30,20 +41,25 @@ module.exports = (robot) ->
       unless code == 0
         msg.send "There was an error deploying on #{target}: Code #{code}"
 
+  unprotectedHosts =
+    'ops-db01': '172.18.0.121'
+    'ops-proc01': '172.18.0.131'
+    'ops-proc02': '172.18.0.132'
+    'ops-proc03': '172.18.0.133'
+
   hostList =
     'ops-db01': '172.18.0.121'
     'ops-proc01': '172.18.0.131'
     'ops-proc02': '172.18.0.132'
+    'ops-proc03': '172.18.0.133'
     'ssint2-proc01': '172.18.0.31'
     'ssint2-proc02': '172.18.0.32'
     'ssint2-proc03': '172.18.0.33'
     'ssint2-proc04': '172.18.0.34'
     'ssint2-proc05': '172.18.0.35'
     'ssint2-proc06': '172.18.0.36'
-    'ssint2-db01': '172.18.0.13'
-    'ssint2-db02': '172.18.0.17'
-    'ssint2-db03': '172.18.0.19'
-    'ssint2-db04': '172.18.0.24'
+    'ssint2-dbq03': '172.18.0.19'
+    'ssint2-dbq04': '172.18.0.24'
     'qapp06-proc01': '172.17.10.18'
     'qapp06-proc02': '172.17.10.19'
     'qapp06-db01':   '172.17.10.16'
@@ -56,34 +72,19 @@ module.exports = (robot) ->
   targetList =
     'ops-proc01': ['ops-proc01']
     'ops-proc02': ['ops-proc02']
-    'ops-procs': ['ops-proc01', 'ops-proc02']
     'ops-db01': ['ops-db01']
-    'ops-dbs': ['ops-db01']
-    'ops': ['ops-db01', 'ops-proc01', 'ops-proc02']
     'ssint2-proc01': ['ssint2-proc01']
     'ssint2-proc02': ['ssint2-proc02']
     'ssint2-proc03': ['ssint2-proc03']
     'ssint2-proc04': ['ssint2-proc04']
     'ssint2-proc05': ['ssint2-proc05']
     'ssint2-proc06': ['ssint2-proc06']
-    'ssint2-procs': ['ssint2-proc01', 'ssint2-proc02', 'ssint2-proc03', 'ssint2-proc04', 'ssint2-proc05', 'ssint2-proc06']
-    'ssint2-db01': ['ssint2-db01']
-    'ssint2-db02': ['ssint2-db02']
-    'ssint2-db03': ['ssint2-db03']
-    'ssint2-db04': ['ssint2-db04']
-    'ssint2-dbs': ['ssint2-db01', 'ssint2-db02', 'ssint2-db03', 'ssint2-db04']
-    'ssint2': ['ssint2-db01', 'ssint2-db02', 'ssint2-db03', 'ssint2-db04', 'ssint2-proc01', 'ssint2-proc02', 'ssint2-proc03', 'ssint2-proc04', 'ssint2-proc05', 'ssint2-proc06']
+    'ssint2-dbq03': ['ssint2-dbq03']
+    'ssint2-dbq04': ['ssint2-dbq04']
     'qapp06-proc01': ['qapp06-proc01']
     'qapp06-proc02': ['qapp06-proc02']
-    'qapp06-procs': ['qapp06-proc01', 'qapp06-proc02']
-    'qapp06-db01': ['qapp06-db01']
     'qapp06-db02': ['qapp06-db02']
     'qapp06-db03': ['qapp06-db03']
-    'qapp06-dbs': ['qapp06-db01', 'qapp06-db02', 'qapp06-db03' ]
-    'qapp06': ['qapp06-db01', 'qapp06-db02', 'qapp06-db03', 'qapp06-proc01', 'qapp06-proc02' ]
     'aj-proc01': ['aj-proc01']
-    'aj-procs': ['aj-proc01']
     'aj-db01': ['aj-db01']
-    'aj-dbs': ['ajdb01']
-    'aj': ['aj-db01', 'aj-proc01']
 
