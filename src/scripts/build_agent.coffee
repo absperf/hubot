@@ -69,7 +69,8 @@ module.exports = (robot) ->
           msg.send "Sorry, but I couldn't run `bundle install` in the jruby-agent-#{platform} repo:"
 
     buildLinux = (msg, arch) ->
-      rake = spawn('bundle', ['exec', 'rake', "build:#{branch}:#{arch}:upload"], { cwd: workingCopy })
+      # rake = spawn('bundle', ['exec', 'rake', "build:#{branch}:#{arch}:upload"], { cwd: workingCopy })
+      rake = spawn('rake', ["build:#{branch}:#{arch}:upload"], { cwd: workingCopy })
       rake.stdout.on 'data', (data) -> output.push(data)
       rake.stderr.on 'data', (data) -> output.push(data)
       rake.on 'exit', (code) ->
