@@ -6,4 +6,7 @@
 
 module.exports = (robot) ->
   robot.respond /flip( the table| table)?/i, (msg) ->
-    msg.send ' (╯°□°）╯︵ ┻━┻'
+    msg.send('(╯°□°）╯︵ ┻━┻')
+
+    setTimeout (-> msg.send '┬─┬ノ(º_ºノ)'), 10000
+
