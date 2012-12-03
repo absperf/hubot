@@ -7,7 +7,7 @@
 module.exports = (robot) ->
   robot.respond /fix (.+)/i, (msg) ->
     target = msg.match[1]
-    msg.send("Okay. Trying to fix #{target}.")
+    msg.send("Trying to fix #{target}.")
 
     fixes = [
       'The problem was memcachd.',
