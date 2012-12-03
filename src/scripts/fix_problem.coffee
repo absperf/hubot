@@ -13,7 +13,8 @@ module.exports = (robot) ->
       'The problem was memcachd.',
       'It just needed to be restarted.',
       'Adam broke it before he left.',
-      "I cherry picked a few random commits from a couple years ago."
+      'I cherry picked a few random commits from a couple years ago.',
+      'The CPU fluid was out.'
     ]
 
     fix = fixes[Math.floor(Math.random() * fixes.length)]
