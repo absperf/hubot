@@ -10,12 +10,13 @@ module.exports = (robot) ->
   robot.respond /flip (a |the |an )?(.+)/i, (msg) ->
     message = msg.match[2]
     if message.match(/table/)
-      message = flipped_message = ''
+      message = '┬──┬'
+      flipped_message = '┻━━┻'
     else
       flipped_message = flip_message(message)
 
-    msg.send("(╯°□°）╯︵ ┻━#{flipped_message}┻")
-    setTimeout (-> msg.send "┬#{message}─┬ノ(º_ºノ)"), 10000
+    msg.send("(╯°□°）╯︵ #{flipped_message}")
+    setTimeout (-> msg.send "#{message} ノ(º_ºノ)"), 10000
 
   flip_message = (message) ->
     message = message.toLowerCase()
