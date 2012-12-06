@@ -11,6 +11,8 @@ module.exports = (robot) ->
     platform = msg.match[2]
     branch = msg.match[3]
 
+    tag = if branch == 'edge' then '-dev' else ''
+
     workingCopy = "/home/ubuntu/jruby-agent-#{platform}"
     output = []
 
@@ -75,7 +77,7 @@ module.exports = (robot) ->
       rake.stderr.on 'data', (data) -> output.push(data)
       rake.on 'exit', (code) ->
         if code == 0
-          msg.send "The #{platform} #{arch}(#{branch}) agent installer has been built and uploaded to s3 at https://s3.amazonaws.com/agent-dist/latest/agent-linux-#{arch}#{'-dev' if branch == 'edge'}.sh"
+          msg.send "The #{platform} #{arch}(#{branch}) agent installer has been built and uploaded to s3 at https://s3.amazonaws.com/agent-dist/latest/agent-linux-#{arch}#{tag}.sh"
         else
           msg.send output.join("\n")
           msg.send "Sorry, but I couldn't build the #{branch} #{platform} #{arch} agent installer."
@@ -90,7 +92,7 @@ module.exports = (robot) ->
       chef.stderr.on 'data', (data) -> output.push(data)
       chef.on 'exit', (code) ->
         if code == 0
-          msg.send "The #{branch} #{platform} agent installer has been built and uploaded to S3 at https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent.exe."
+          msg.send "The #{branch} #{platform} agent installer has been built and uploaded to S3 at https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent#{tag}.exe."
         else
           msg.send output.join("\n")
           msg.send "Sorry, but I couldn't build the #{branch} #{platform} agent installer."
