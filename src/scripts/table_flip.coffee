@@ -8,7 +8,7 @@
 
 module.exports = (robot) ->
   robot.respond /flip (a |the |an )?(.+)/i, (msg) ->
-    message = message.match[2]
+    message = msg.match[2]
     if message.match(/table/)
       message = flipped_message = ''
     else
