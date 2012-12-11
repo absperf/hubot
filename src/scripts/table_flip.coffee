@@ -38,7 +38,7 @@ module.exports = (robot) ->
       when 'g' then "b"
       when 'h' then "ɥ"
       when 'i' then "ı"
-      when 'j' then "ظ"
+      when 'j' then "ɾ"
       when 'k' then "ʞ"
       when 'l' then "ן"
       when 'm' then "ɯ"
