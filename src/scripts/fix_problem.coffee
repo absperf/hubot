@@ -10,7 +10,7 @@ module.exports = (robot) ->
     msg.send("Trying to fix #{target}.")
 
     fixes = [
-      'The problem was memcachd.',
+      'The problem was memcached.',
       'It just needed to be restarted.',
       'Adam broke it before he left.',
       'I cherry picked a few random commits from a couple years ago.',
