@@ -7,13 +7,13 @@ spawn = require('child_process').spawn
 fs = require('fs')
 
 module.exports = (robot) ->
-  robot.respond /(make|build)( .+)? some( .+)? (agents|installers|magic)/i, (msg) ->
+  robot.respond /(make|build)( .+)? (some|both)( .+)? (agents|installers|magic)(!)?/i, (msg) ->
 
-    for platform in ['windows', 'linux']
+    for platform in ['linux', 'windows']
       msg.message.text = "smith build the #{platform} edge agent"
       robot.receive msg.message
-      msg['message']['done'] = true
 
+    msg['message']['done'] = true
 
   robot.respond /build( the)? (windows|linux) (master|edge) (agent|installer)$/i, (msg) ->
     platform = msg.match[2]
