@@ -7,7 +7,7 @@ spawn = require('child_process').spawn
 fs = require('fs')
 
 module.exports = (robot) ->
-  robot.respond /(what are|where are|give me|print|tell this fool where) the agent (link|installer)(s)?( are)?/i, (msg) ->
+  robot.respond /(what are|where are|give me|print|show this fool where) the agent (link|installer)(s)?( are)?/i, (msg) ->
 
     links = [
       "Windows Edge: https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent-dev.exe ",
@@ -18,8 +18,8 @@ module.exports = (robot) ->
       "Linux Master x86_64: https://s3.amazonaws.com/agent-dist/latest/agent-linux-x86_64.sh "
     ]
 
-    for number in [0..5]
-      setTimeout (-> msg.send links[number]), (number * 1000)
+    for link in links
+      msg.send link
 
   robot.respond /(make|build)( .+)? (some|both)( .+)? (agents|installers|magic)( again)?(!)?/i, (msg) ->
 
