@@ -10,21 +10,16 @@ module.exports = (robot) ->
   robot.respond /(what are|where are|give me|print|tell this fool where) the agent (link|installer)(s)?( are)?/i, (msg) ->
 
     response = [
-      "Windows Edge:",
-      "https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent-dev.exe",
-      "Windows Master:",
-      "https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent.exe",
-      "Linux Edge:",
-      "https://s3.amazonaws.com/agent-dist/latest/agent-linux-i586-dev.sh",
-      "https://s3.amazonaws.com/agent-dist/latest/agent-linux-x86_64-dev.sh",
-      "Linux Master:",
-      "https://s3.amazonaws.com/agent-dist/latest/agent-linux-i586.sh",
-      "https://s3.amazonaws.com/agent-dist/latest/agent-linux-x86_64.sh"
+      "Windows Edge: https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent-dev.exe",
+      "Windows Master: https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent.exe",
+      "Linux Edge i586: https://s3.amazonaws.com/agent-dist/latest/agent-linux-i586-dev.sh",
+      "Linux Edge x86_64: https://s3.amazonaws.com/agent-dist/latest/agent-linux-x86_64-dev.sh",
+      "Linux Master i586: https://s3.amazonaws.com/agent-dist/latest/agent-linux-i586.sh",
+      "Linux Master x86_64: https://s3.amazonaws.com/agent-dist/latest/agent-linux-x86_64.sh"
     ]
 
-    for number in [1..10]
-      setTimeout (-> msg.send response[number]), (number * 100)
-
+    for number in [0..6]
+      setTimeout (-> msg.send response[number]), (number * 1000)
 
   robot.respond /(make|build)( .+)? (some|both)( .+)? (agents|installers|magic)( again)?(!)?/i, (msg) ->
 
