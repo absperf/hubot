@@ -7,7 +7,26 @@ spawn = require('child_process').spawn
 fs = require('fs')
 
 module.exports = (robot) ->
-  robot.respond /(make|build)( .+)? (some|both)( .+)? (agents|installers|magic)(!)?/i, (msg) ->
+  robot.respond /(what are|where are|give me|print|tell this fool where) the agent (link|installer)(s)?( are)?/i, (msg) ->
+
+    response = [
+      "Windows Edge:",
+      "https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent-dev.exe",
+      "Windows Master:",
+      "https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent.exe",
+      "Linux Edge:",
+      "https://s3.amazonaws.com/agent-dist/latest/agent-linux-i586-dev.sh",
+      "https://s3.amazonaws.com/agent-dist/latest/agent-linux-x86_64-dev.sh",
+      "Linux Master:",
+      "https://s3.amazonaws.com/agent-dist/latest/agent-linux-i586.sh",
+      "https://s3.amazonaws.com/agent-dist/latest/agent-linux-x86_64.sh"
+    ]
+
+    for number in [1..10]
+      setTimeout (-> msg.send response[number]), (number * 100)
+
+
+  robot.respond /(make|build)( .+)? (some|both)( .+)? (agents|installers|magic)( again)?(!)?/i, (msg) ->
 
     for platform in ['linux', 'windows']
       msg.message.text = "smith build the #{platform} edge agent"
