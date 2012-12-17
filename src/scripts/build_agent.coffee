@@ -9,7 +9,7 @@ fs = require('fs')
 module.exports = (robot) ->
   robot.respond /(what are|where are|give me|print|tell this fool where) the agent (link|installer)(s)?( are)?/i, (msg) ->
 
-    response = [
+    links = [
       "Windows Edge: https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent-dev.exe",
       "Windows Master: https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent.exe",
       "Linux Edge i586: https://s3.amazonaws.com/agent-dist/latest/agent-linux-i586-dev.sh",
@@ -18,8 +18,13 @@ module.exports = (robot) ->
       "Linux Master x86_64: https://s3.amazonaws.com/agent-dist/latest/agent-linux-x86_64.sh"
     ]
 
-    for number in [0..6]
-      setTimeout (-> msg.send response[number]), (number * 1000)
+    dunno = [ "Who knows? Ask someone else." ]
+
+    for number in [0]
+      setTimeout (-> msg.send dunno[number]), (number * 1000)
+
+    # for number in [0..5]
+      # setTimeout (-> msg.send links[number]), (number * 1000)
 
   robot.respond /(make|build)( .+)? (some|both)( .+)? (agents|installers|magic)( again)?(!)?/i, (msg) ->
 
