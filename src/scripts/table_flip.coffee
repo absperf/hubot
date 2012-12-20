@@ -7,7 +7,7 @@
 #   hubot flip [a|the|an] [table|something]
 
 module.exports = (robot) ->
-  robot.respond /flip (a |the |an )?(.+)/i, (msg) ->
+  robot.respond /flip (a |the |an |my )?(.+)( permanently| forever| don't set it down)?/i, (msg) ->
     message = msg.match[2]
     if message.match(/table/)
       message = '┬──┬'
@@ -16,7 +16,9 @@ module.exports = (robot) ->
       flipped_message = flip_message(message)
 
     msg.send("(╯°□°）╯︵ #{flipped_message}")
-    setTimeout (-> msg.send "#{message} ノ(º_ºノ)"), 10000
+
+    unless msg.match[3]
+      setTimeout (-> msg.send "#{message} ノ(º_ºノ)"), 10000
 
   flip_message = (message) ->
     message = message.toLowerCase()

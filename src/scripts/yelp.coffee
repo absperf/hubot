@@ -15,7 +15,7 @@ yelp = require('yelp').createClient(
   token_secret: process.env.YELP_TOKEN_SECRET)
 
 module.exports = (robot) ->
-  robot.respond /(suggestion|recommendation) category list/i, (msg) ->
+  robot.respond /(yelp|suggestion|recommendation) category list/i, (msg) ->
     url = 'http://www.yelp.com/developers/documentation/category_list'
 
     help_text = ['The category names are in parentheses:']
@@ -28,9 +28,9 @@ module.exports = (robot) ->
     msg.send help_text.join("\n")
     setTimeout (-> msg.send url), 2000
 
-  robot.respond /(suggest|recommend) (.+) (at|in|near|by) (.*)/i, (msg) ->
+  robot.respond /(yelp|suggest|recommend) (.+) (at|in|near|by) (.*)/i, (msg) ->
     filter = msg.match[2]
-    filter = '' if filter == 'random'
+    filter = 'restaurants' if filter == 'random'
     location = msg.match[4]
 
     query =
