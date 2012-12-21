@@ -109,7 +109,7 @@ module.exports = (robot) ->
 
     # Runs chef solo to build and upload the installer.
     buildWindows = (msg, arch) ->
-      chef = spawn('sudo', ['bundle', 'exec', 'chef-solo', '-c', "#{workingCopy}/chef/solo.rb", '-j', "#{workingCopy}/chef/#{arch}-#{branch}-solo.json"], { cwd :workingCopy })
+      chef = spawn('sudo', ['bundle', 'exec', 'chef-solo', '-c', "#{workingCopy}/chef/solo.rb", '-j', "#{workingCopy}/chef/#{branch}-#{arch}-solo.json"], { cwd :workingCopy })
       chef.stdout.on 'data', (data) -> output.push(data)
       chef.stderr.on 'data', (data) -> output.push(data)
       chef.on 'exit', (code) ->
