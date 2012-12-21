@@ -12,6 +12,8 @@ module.exports = (robot) ->
     links = [
       "Windows Edge: https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent-dev.exe ",
       "Windows Master: https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent.exe ",
+      "Windows Edge i586: https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent-dev.exe ",
+      "Windows Master x86_64: https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent.exe ",
       "Linux Edge i586: https://s3.amazonaws.com/agent-dist/latest/agent-linux-i586-dev.sh ",
       "Linux Edge x86_64: https://s3.amazonaws.com/agent-dist/latest/agent-linux-x86_64-dev.sh ",
       "Linux Master i586: https://s3.amazonaws.com/agent-dist/latest/agent-linux-i586.sh ",
@@ -85,7 +87,7 @@ module.exports = (robot) ->
       bundle.on 'exit', (code) ->
         if code == 0
           if platform == 'windows'
-            buildWindows msg
+            buildWindows(msg, 'i586')
           else
             buildLinux(msg, 'i586')
         else
@@ -93,7 +95,6 @@ module.exports = (robot) ->
           msg.send "Sorry, but I couldn't run `bundle install` in the jruby-agent-#{platform} repo:"
 
     buildLinux = (msg, arch) ->
-      # rake = spawn('bundle', ['exec', 'rake', "build:#{branch}:#{arch}:upload"], { cwd: workingCopy })
       rake = spawn('rake', ["build:#{branch}:#{arch}:upload"], { cwd: workingCopy })
       rake.stdout.on 'data', (data) -> output.push(data)
       rake.stderr.on 'data', (data) -> output.push(data)
@@ -102,20 +103,22 @@ module.exports = (robot) ->
           msg.send "The #{platform} #{arch}(#{branch}) agent installer has been built and uploaded to s3 at https://s3.amazonaws.com/agent-dist/latest/agent-linux-#{arch}#{tag}.sh"
         else
           msg.send output.join("\n")
-          msg.send "Sorry, but I couldn't build the #{branch} #{platform} #{arch} agent installer."
+          msg.send "Sorry, but I couldn't build the #{platform} #{arch}(#{branch}) agent installer."
 
         buildLinux(msg, 'x86_64') unless arch == 'x86_64'
 
     # Runs chef solo to build and upload the installer.
-    buildWindows = (msg) ->
-      chef = spawn('sudo', ['bundle', 'exec', 'chef-solo', '-c', "#{workingCopy}/chef/solo.rb", '-j', "#{workingCopy}/chef/#{branch}-solo.json"], { cwd :workingCopy })
+    buildWindows = (msg, arch) ->
+      chef = spawn('sudo', ['bundle', 'exec', 'chef-solo', '-c', "#{workingCopy}/chef/solo.rb", '-j', "#{workingCopy}/chef/#{arch}-#{branch}-solo.json"], { cwd :workingCopy })
       chef.stdout.on 'data', (data) -> output.push(data)
       chef.stderr.on 'data', (data) -> output.push(data)
       chef.on 'exit', (code) ->
         if code == 0
-          msg.send "The #{branch} #{platform} agent installer has been built and uploaded to S3 at https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent#{tag}.exe."
+          msg.send "The #{platform} #{arch}(#{branch)}) agent installer has been built and uploaded to S3 at https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent-#{arch}#{tag}.exe."
         else
           msg.send output.join("\n")
-          msg.send "Sorry, but I couldn't build the #{branch} #{platform} agent installer."
+          msg.send "Sorry, but I couldn't build the #{platform} #{arch}(#{branch}) agent installer."
+
+        buildWindows(msg, 'x86_64') unless arch == 'x86_64'
 
     updateRepo msg
