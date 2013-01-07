@@ -6,6 +6,11 @@
 spawn = require('child_process').spawn
 fs = require('fs')
 
+rooms = {
+  dev: process.env.DEV
+  ops: process.env.OPS
+}
+
 module.exports = (robot) ->
   robot.respond /(what are|where are|give me|print|show this fool where) the agent (link|installer)(s)?( are)?/i, (msg) ->
 
@@ -100,7 +105,8 @@ module.exports = (robot) ->
       rake.stderr.on 'data', (data) -> output.push(data)
       rake.on 'exit', (code) ->
         if code == 0
-          msg.send "The #{platform} #{arch}(#{branch}) agent installer has been built and uploaded to s3 at https://s3.amazonaws.com/agent-dist/latest/agent-linux-#{arch}#{tag}.sh"
+          for room in rooms
+            msg.messageRoom room, "The #{platform} #{arch}(#{branch}) agent installer has been built and uploaded to s3 at https://s3.amazonaws.com/agent-dist/latest/agent-linux-#{arch}#{tag}.sh"
         else
           msg.send output.join("\n")
           msg.send "Sorry, but I couldn't build the #{platform} #{arch}(#{branch}) agent installer."
@@ -114,7 +120,8 @@ module.exports = (robot) ->
       chef.stderr.on 'data', (data) -> output.push(data)
       chef.on 'exit', (code) ->
         if code == 0
-          msg.send "The #{platform} #{arch}(#{branch}) agent installer has been built and uploaded to S3 at https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent-#{arch}#{tag}.exe."
+          for room in rooms
+            msg.messageRoom room, "The #{platform} #{arch}(#{branch}) agent installer has been built and uploaded to S3 at https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent-#{arch}#{tag}.exe."
         else
           msg.send output.join("\n")
           msg.send "Sorry, but I couldn't build the #{platform} #{arch}(#{branch}) agent installer."
