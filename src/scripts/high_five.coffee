@@ -12,4 +12,4 @@ module.exports = (robot) ->
   ]
 
   robot.respond /high five me/i, (msg) ->
-    msg.send highFives[Math.floor(Math.random*highFives.length)]
+    msg.send highFives[Math.floor(Math.random()*highFives.length)]
