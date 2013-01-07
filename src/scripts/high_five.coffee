@@ -8,7 +8,7 @@
 module.exports = (robot) ->
   highFives = [
     "http://www.wired.com/images/article/magazine/1607/st_howto_f.jpg#.png",
-    "(＾∇＾)/\(＾∇＾)"
+    "(＾∇＾)/\\(＾∇＾)"
   ]
 
   robot.respond /high five me/i, (msg) ->
