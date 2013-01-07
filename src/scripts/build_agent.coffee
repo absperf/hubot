@@ -121,7 +121,7 @@ module.exports = (robot) ->
       chef.on 'exit', (code) ->
         if code == 0
           for room_name, room_id of rooms
-            msg.messageRoom room_id, "The #{platform} #{arch}(#{branch}) agent installer has been built and uploaded to S3 at https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent-#{arch}#{tag}.exe."
+            robot.messageRoom room_id, "The #{platform} #{arch}(#{branch}) agent installer has been built and uploaded to S3 at https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent-#{arch}#{tag}.exe."
         else
           msg.send output.join("\n")
           msg.send "Sorry, but I couldn't build the #{platform} #{arch}(#{branch}) agent installer."
