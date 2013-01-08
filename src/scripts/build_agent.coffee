@@ -105,8 +105,8 @@ module.exports = (robot) ->
       rake.stderr.on 'data', (data) -> output.push(data)
       rake.on 'exit', (code) ->
         if code == 0
-          for room in rooms
-            msg.messageRoom room, "The #{platform} #{arch}(#{branch}) agent installer has been built and uploaded to s3 at https://s3.amazonaws.com/agent-dist/latest/agent-linux-#{arch}#{tag}.sh"
+          for room_name, room_id of rooms
+            robot.messageRoom room_id, "The #{platform} #{arch}(#{branch}) agent installer has been built and uploaded to s3 at https://s3.amazonaws.com/agent-dist/latest/agent-linux-#{arch}#{tag}.sh"
         else
           msg.send output.join("\n")
           msg.send "Sorry, but I couldn't build the #{platform} #{arch}(#{branch}) agent installer."
