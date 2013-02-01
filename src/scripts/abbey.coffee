@@ -22,6 +22,7 @@ module.exports = (robot) ->
       'keeping a journal of your daily activities.',
       "trying to figure out the best way to turn you inside out.",
       'waiting for you in the back seat of your car.',
+      'going through your trash.',
       'counting the seconds until you two can be together... FOREVER.'
     ]
 
