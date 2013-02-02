@@ -10,7 +10,7 @@
 #   HUBOT_SMS_FROM
 #
 # Commands:
-#   hubot text [to[ this: [message] - Sends [message] to the user [to[
+#   hubot text [to] this: [message] - Sends [message] to the user [to[
 #   hubot set phone number for [name] to [number]
 #
 # Author:
