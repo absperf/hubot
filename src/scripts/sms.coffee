@@ -24,7 +24,7 @@ module.exports = (robot) ->
     if users.length is 1
       user = users[0]
       user.phone = msg.match[2].trim()
-      user.save()
+      user.save
     else if users.length > 1
       msg.send "name matches more than one person"
     else
