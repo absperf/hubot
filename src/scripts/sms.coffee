@@ -20,7 +20,7 @@
 QS = require "querystring"
 
 module.exports = (robot) ->
-  robot.respond /set phone number for @?(\w .-_]+) to (.+)/, (msg) ->
+  robot.respond /set phone number for @?([\w .-_]+) to (.+)/, (msg) ->
     name = msg.match[1].trim()
     users = robot.usersForFuzzyName(name)
     if users.length is 1
