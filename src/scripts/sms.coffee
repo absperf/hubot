@@ -10,10 +10,12 @@
 #   HUBOT_SMS_FROM
 #
 # Commands:
-#   hubot sms <to> <message> - Sends <message> to the number <to>
+#   hubot text <to> this: <message> - Sends <message> to the user <to>
+#   hubot set phone number for <name> to <number>
 #
 # Author:
 #   caleywoods
+#   trinary
 
 QS = require "querystring"
 
