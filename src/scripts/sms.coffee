@@ -18,6 +18,18 @@
 QS = require "querystring"
 
 module.exports = (robot) ->
+  robot.respond /set phone number for (.+?) to (.+)/, (msg) ->
+    name = msg.match[1].trim()
+    users = robot.usersForFuzzyName(name)
+    if users.length is 1
+      user = users[0]
+      user.phone = msg.match[2].trim()
+      user.save()
+    else if users.length > 1
+      msg.send "name matches more than one person"
+    else
+      msg.send "I don't know who that is."
+
   robot.respond /sms (\d+) (.*)/i, (msg) ->
     to    = msg.match[1]
     bahdy = msg.match[2] # bahdy, that's how john mayer would say it.
