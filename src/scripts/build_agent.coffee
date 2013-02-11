@@ -8,11 +8,11 @@ fs = require('fs')
 
 rooms = {
   dev: process.env.DEV
-  ops: process.env.OPS
+  # ops: process.env.OPS
 }
 
 module.exports = (robot) ->
-  robot.respond /(what are|where are|give me|print|show this fool where) the agent (link|installer)(s)?( are)?/i, (msg) ->
+  robot.respond /(what are|where are|give me|print|show) the agent (link|installer)(s)?( are)?/i, (msg) ->
 
     links = [
       "Windows Edge: https://s3.amazonaws.com/agent-dist/latest/SystemShepherdAgent-i586-dev.exe ",
