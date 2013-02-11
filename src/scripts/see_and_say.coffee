@@ -2,8 +2,8 @@
 #   Ask Smith what the cow says.
 #
 # Commands:
-#   hubot [what does the cow say?]
-#   hubot [the cow says] [text]
+#   hubot what does the cow say?
+#   hubot the cow says [text]
 
 module.exports = (robot) ->
 
@@ -21,7 +21,7 @@ module.exports = (robot) ->
 
   robot.respond /the cow says (.+)/i, (msg) ->
     message = msg.match[1]
-    if message.length < 20
+    if message.length < 50
       exports.cowPhrase = message
       msg.send "Okay, the cow says #{message}"
 
