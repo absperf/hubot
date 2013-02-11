@@ -24,4 +24,6 @@ module.exports = (robot) ->
     if message.length < 50
       exports.cowPhrase = message
       msg.send "Okay, the cow says #{message}"
+    else
+      msg.send "The cow can only say messages less than 50 characters in length."
 
