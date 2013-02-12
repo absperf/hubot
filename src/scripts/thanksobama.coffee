@@ -25,5 +25,5 @@ module.exports = (robot) ->
   ]
 
   robot.respond /thanks,?\s+obama/i, (msg) ->
-    msg.send thanks[Math.floor(Math.random()*ninjas.length)]
+    msg.send thanks[Math.floor(Math.random()*thanks.length)]
 
