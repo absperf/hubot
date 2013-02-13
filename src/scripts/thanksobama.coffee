@@ -24,6 +24,6 @@ module.exports = (robot) ->
     "http://i.imgur.com/5Clgi.gif",
   ]
 
-  robot.respond /thanks,?\s+obama/i, (msg) ->
+  robot.hear /thanks,?\s+obama/i, (msg) ->
     msg.send thanks[Math.floor(Math.random()*thanks.length)]
 
