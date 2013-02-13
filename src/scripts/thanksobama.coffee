@@ -21,7 +21,7 @@ module.exports = (robot) ->
     "http://i.imgur.com/5jq76.gif",
     "http://i.imgur.com/h1X0v.gif",
     "http://i.imgur.com/9B5F2.gif",
-    "http://i.imgur.com/5Clgi.gif",
+    "http://i.imgur.com/5Clgi.gif"
   ]
 
   robot.hear /thanks,?\s+obama/i, (msg) ->
