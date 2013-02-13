@@ -9,7 +9,7 @@ module.exports = (robot) ->
   thanks = [
     "http://i.imgur.com/nKZciEY.gif",
     "http://i.minus.com/ibrr7LpmCwfKJm.gif",
-    "http://imgur.com/GsSKEsk",
+    "http://imgur.com/GsSKEsk.gif",
     "http://i.imgur.com/gvkx8hp.gif",
     "http://i.imgur.com/fJW8dnj.gif",
     "http://i.imgur.com/VrERIRo.gif",
