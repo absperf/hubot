@@ -46,7 +46,8 @@ module.exports = (robot) ->
         upload.stderr.on 'data', (data) -> output.push(data)
         upload.on 'exit', (code) ->
           if code == 0
-            msg.send (sealNames[seal.name] for seal in jutsu).join(' ')
+            seals = (sealNames[seal.name] for seal in jutsu).join(' ')
+            msg.send seals + " no jutsu!"
             msg.send post[0].upload.links.original
           else
             msg.send output.join(' ')
