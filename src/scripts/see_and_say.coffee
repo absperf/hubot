@@ -7,11 +7,11 @@
 
 module.exports = (robot) ->
 
-  exports.cowPhrase = 'moo!'
-
   robot.respond /what does the cow say\??/i, (msg) ->
+    smith = robot.usersForFuzzyName('Smith')[0]
+
     msg.send """
- V        _(__)_ (  #{exports.cowPhrase}  )
+ V        _(__)_ (  #{smith.cowPhrase}  )
 (__.--,__'-e e -' |/
   (   `--' (o_o)
   |  )  )\\ ./
@@ -22,7 +22,10 @@ module.exports = (robot) ->
   robot.respond /the cow says (.+)/i, (msg) ->
     message = msg.match[1]
     if message.length < 50
-      exports.cowPhrase = message
+      smith = robot.usersForFuzzyName('Smith')[0]
+      smith.cowPhrase = message
+      smith.save
+
       msg.send "Okay, the cow says #{message}"
     else
       msg.send "The cow can only say messages less than 50 characters in length."
