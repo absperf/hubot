@@ -25,7 +25,8 @@ module.exports = (robot) ->
     'http://25.media.tumblr.com/tumblr_m6psy25inb1qixk4mo1_r1_500.gif',
     'http://24.media.tumblr.com/tumblr_m8wl02zJBY1rdi0uro1_250.gif',
     'http://25.media.tumblr.com/tumblr_m8wl3qlLID1qmnzt5o1_500.jpg',
-    'http://24.media.tumblr.com/tumblr_m8wkkxsMtd1rdi0uro1_500.gif'
+    'http://24.media.tumblr.com/tumblr_m8wkkxsMtd1rdi0uro1_500.gif',
+    'http://i.imgur.com/1j7hjB5.gif'
   ]
 
   robot.respond /corgi me/i, (msg) ->
