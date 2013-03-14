@@ -13,7 +13,7 @@ module.exports = (robot) ->
     robot.receive msg.message
     msg['message']['done'] = true
 
-  robot.respond /what( even)? is( a)? pope\?/i, (msg) ->
+  robot.hear /what( even)? is( a)? pope\?/i, (msg) ->
     popes = ['bascially human god',
              'great warrior',
              'groundhog',
