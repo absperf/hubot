@@ -14,12 +14,14 @@ module.exports = (robot) ->
     msg['message']['done'] = true
 
   robot.respond /what( even)? is( a)? pope\?/i, (msg) ->
-    popes = ['bascially a human god',
+    popes = ['bascially human god',
              'groundhog',
              'animal from jungle',
              'comrade in arms',
              'brother from another mother',
-             'old man with big hat']
+             'old man with big hat',
+             'man who wear dress and jewelrey',
+             'strong like bull']
 
     msg.send 'pope is ' + popes[Math.floor(Math.random() * popes.length)]
 
