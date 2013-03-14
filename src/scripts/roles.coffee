@@ -60,8 +60,8 @@ module.exports = (robot) ->
               msg.send "Ok, #{name} is #{newRole}."
         else if users.length > 1
           msg.send getAmbiguousUserText users
-        else
-          msg.send "I don't know anything about #{name}."
+        # else
+          # msg.send "I don't know anything about #{name}."
 
   robot.respond /@?([\w .-_]+) is not (["'\w: -_]+)[.!]*$/i, (msg) ->
     name    = msg.match[1].trim()
@@ -80,6 +80,6 @@ module.exports = (robot) ->
           msg.send "Ok, #{name} is no longer #{newRole}."
       else if users.length > 1
         msg.send getAmbiguousUserText users
-      else
-        msg.send "I don't know anything about #{name}."
+      # else
+        # msg.send "I don't know anything about #{name}."
 
