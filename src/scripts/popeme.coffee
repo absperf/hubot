@@ -21,5 +21,5 @@ module.exports = (robot) ->
              'brother from another mother',
              'old man with big hat']
 
-    msg.send 'pope is' + popes[Math.floor(Math.random() * popes.length)]
+    msg.send 'pope is ' + popes[Math.floor(Math.random() * popes.length)]
 
