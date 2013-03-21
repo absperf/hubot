@@ -26,7 +26,7 @@ module.exports = (robot) ->
     randomMessage msg, exclamations
 
   randomMessage = (msg, messages) ->
-    if Math.floor(Math.random() * 5) == 0
+    if Math.floor(Math.random() * 7) == 0
       msg.send messages[Math.floor(Math.random() * messages.length)]
 
   greetings = (name) ->
