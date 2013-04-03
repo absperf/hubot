@@ -7,8 +7,6 @@
 
 module.exports = (robot) ->
   robot.respond /tell me a story/i, (msg) ->
-    msg.send("Okay.  Once upon a time...")
-
     emoji = [
       ':bowtie:',
       ':smile:',
@@ -879,8 +877,9 @@ module.exports = (robot) ->
       ':small_red_triangle_down:',
       ':shipit:'
     ]
-    randomemoji = () ->
+
+    randomEmoji = () ->
        emoji[Math.floor(Math.random()*emoji.length)]
 
-    story = String.fromCharCode(randomemoji(),randomemoji(), randomemoji(), randomemoji(), randomemoji())
+    story = "#{randomEmoji()} #{randomEmoji()} #{randomEmoji()} #{randomEmoji()} #{randomEmoji()}"
     msg.send story
