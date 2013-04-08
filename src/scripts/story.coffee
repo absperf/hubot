@@ -883,3 +883,5 @@ module.exports = (robot) ->
 
     story = "#{randomEmoji()} #{randomEmoji()} #{randomEmoji()} #{randomEmoji()} #{randomEmoji()}"
     msg.send story
+    msg['message']['done'] = true
+
