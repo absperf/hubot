@@ -13,6 +13,7 @@ module.exports = (robot) ->
       'The problem was memcached.',
       'It just needed to be restarted.',
       'Adam broke it before he left.',
+      'Joanne broke it before she left.',
       'I cherry picked a few random commits from a couple years ago.',
       'The CPU fluid was out.',
       'Quit using IE.',
