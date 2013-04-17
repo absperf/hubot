@@ -35,8 +35,14 @@ imageMe = (msg, query, animated, cb) ->
     .query(q)
     .get() (err, res, body) ->
       images = JSON.parse(body)
-      images = images.responseData.results
-      if images.length > 0
-        image  = msg.random images
-        cb "#{image.unescapedUrl}#.png"
+
+      if images.reponseData
+        images = images.responseData.results
+        if images.length > 0
+          image  = msg.random images
+          cb "#{image.unescapedUrl}#.png"
+        else
+          cb "I didnt find a picture that matches '#{query}'."
+      else
+        cb "I didnt find a picture that matches '#{query}'."
 
