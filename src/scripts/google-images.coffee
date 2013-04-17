@@ -42,7 +42,7 @@ imageMe = (msg, query, animated, cb) ->
           image  = msg.random images
           cb "#{image.unescapedUrl}#.png"
         else
-          cb "I didnt find a picture that matches '#{query}'."
+          cb "I couldn't find a picture that matches '#{query}'."
       else
-        cb "I didnt find a picture that matches '#{query}'."
+        cb "I couldn't find a picture that matches '#{query}'."
 
