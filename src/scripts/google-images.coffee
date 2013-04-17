@@ -36,7 +36,7 @@ imageMe = (msg, query, animated, cb) ->
     .get() (err, res, body) ->
       images = JSON.parse(body)
 
-      if images.reponseData
+      if images.reponseData?
         images = images.responseData.results
         if images.length > 0
           image  = msg.random images
