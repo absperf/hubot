@@ -12,7 +12,7 @@ module.exports = (robot) ->
         response = JSON.parse(body).return
 
         message = [
-         "1 BTC is currently worth $#{response.last.value} USD",
+         "1 BTC is worth $#{response.last.value} USD",
          "Over the past 24 hours:",
          "  low:          $#{response.low.value} USD",
          "  average:      $#{response.avg.value} USD",
