@@ -1,5 +1,5 @@
 # Description:
-#   Get the current bitcoin valuation and info on the past 24 hours from MTGOX
+#   Get the current bitcoin value and 24 hour info from MTGOX
 #
 # Commands:
 #   hubot bitcoin (info)
