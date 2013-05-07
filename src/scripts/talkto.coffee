@@ -6,7 +6,6 @@
 
 rooms = {
   dev: process.env.DEV
-  ops: process.env.OPS
 }
 
 module.exports = (robot) ->
