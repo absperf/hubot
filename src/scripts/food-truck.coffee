@@ -21,7 +21,6 @@ module.exports = (robot) ->
           date = new Date(status.created_at)
 
           if sameDay(date) && status.text.match(/(flatiron(s)?\s+(business|biz)\s+park|markit\s+on\s+demand)/i) and !status.text.match(/not/i)
-            msg.send status.user.profile_image_url
             msg.send "#{status.user.name}: #{status.text}"
 
 
