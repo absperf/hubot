@@ -10,10 +10,15 @@ module.exports = (robot) ->
       .header('accept', 'application/json')
       .get() (err, res, body) ->
         response = JSON.parse(body).return
-        msg.send "1 BTC is currently worth $#{response.last.value} USD"
-        msg.send "Over the past 24 hours:"
-        msg.send "  low:          $#{response.low.value} USD"
-        msg.send "  average:      $#{response.avg.value} USD"
-        msg.send "  high:         $#{response.high.value} USD"
-        msg.send "  trade volume: #{response.vol.value} BTC ($#{response.vol.value * response.avg.value} USD)"
+
+        message = [
+         "1 BTC is currently worth $#{response.last.value} USD",
+         "Over the past 24 hours:",
+         "  low:          $#{response.low.value} USD",
+         "  average:      $#{response.avg.value} USD",
+         "  high:         $#{response.high.value} USD",
+         "  trade volume: #{response.vol.value} BTC ($#{response.vol.value * response.avg.value} USD)"
+        ]
+
+        msg.send message.join("\n")
 
