@@ -16,7 +16,6 @@ module.exports = (robot) ->
           message = [
             "IP: #{ip}",
             "Reverse Lookup: #{response.reverse}",
-            "Organization: #{response.org}",
             "ISP: #{response.isp}",
             "Location: #{response.city}, #{response.region}"
           ]
