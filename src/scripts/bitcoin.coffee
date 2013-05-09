@@ -6,7 +6,7 @@
 
 module.exports = (robot) ->
   robot.respond /bitcoin( info)?/i, (msg) ->
-    msg.http('http://data.mtgox.com/api/1/BTCUSD/ticker')
+    msg.http('https://data.mtgox.com/api/1/BTCUSD/ticker')
       .header('accept', 'application/json')
       .get() (err, res, body) ->
         response = JSON.parse(body).return
