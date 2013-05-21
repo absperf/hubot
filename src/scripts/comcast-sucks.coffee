@@ -46,16 +46,19 @@ module.exports = (robot) ->
       if code == 0
         if robot.brain.data['routerDown']?
 
-          time = ''
+          time = []
           difference = epoch() - robot.brain.data.routerDown
-          hour = Math.floor(difference / 3600)
-          time = time.concat("#{hour} hours ") if hour > 0
-          minute = Math.floor(difference % 3600 / 60)
-          time = time.concat("#{minute} minutes ") if minute > 0
-          second = Math.floor(difference % 60)
-          time = time.concat("#{second} seconds ") if second > 0
 
-          tweet_downtime(time)
+          hour = Math.floor(difference / 3600)
+          time.push("#{hour} hours") if hour > 0
+
+          minute = Math.floor(difference % 3600 / 60)
+          time.push("#{minute} minutes") if minute > 0
+
+          second = Math.floor(difference % 60)
+          time.push("#{second} seconds") if second > 0
+
+          tweet_downtime(time.join ' ')
 
           delete robot.brain.data.routerDown
           robot.brain.data.routerPing = 0
