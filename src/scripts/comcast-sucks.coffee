@@ -62,11 +62,12 @@ module.exports = (robot) ->
           tweet_downtime time
       else
         if robot.brain.data['routerPing']?
-          robot.brain.data.routerPing += 1
+          if robot.brain.data.routerPing = 3
+            robot.brain.data.routerDown = epoch()
+          else
+            robot.brain.data.routerPing += 1
         else
           robot.brain.data.routerPing = 1
-
-        robot.brain.data.routerDown = epoch() if robot.brain.data.routerPing = 3
 
       setTimeout (-> ping() ), 10000
 
