@@ -66,7 +66,7 @@ module.exports = (robot) ->
         robot.brain.data.routerPing += 1
 
         if robot.brain.data.routerPing == 3
-          robot.brain.data.routerDown = epoch() + 30
+          robot.brain.data.routerDown = epoch() - 30
 
       setTimeout (-> ping() ), 10000
 
