@@ -39,6 +39,8 @@ module.exports = (robot) ->
       else
         robot.messageRoom process.env.DEV, (status + response.id_str)
 
+  robot.brain.data.routerPing = 0
+
   ping = () ->
     OS.spawn('ping', ['-c1', process.env.ROUTER_IP]).on 'exit', (code) ->
       if code == 0
@@ -46,28 +48,22 @@ module.exports = (robot) ->
 
           time = ''
           difference = epoch() - robot.brain.data.routerDown
-
           hour = Math.floor(difference / 3600)
           time = time.concat("#{hour} hours ") if hour > 0
-
           minute = Math.floor(difference % 3600 / 60)
           time = time.concat("#{minute} minutes ") if minute > 0
-
           second = Math.floor(difference % 60)
           time = time.concat("#{second} seconds ") if second > 0
 
           tweet_downtime(time)
 
           delete robot.brain.data.routerDown
-          delete robot.brain.data.routerPing
+          robot.brain.data.routerPing = 0
       else
-        if robot.brain.data['routerPing']?
-          if robot.brain.data.routerPing = 3
-          else
-            robot.brain.data.routerPing += 1
-        else
-          robot.brain.data.routerPing = 1
-          robot.brain.data.routerDown = epoch()
+        robot.brain.data.routerPing += 1
+
+        if robot.brain.data.routerPing == 3
+          robot.brain.data.routerDown = epoch() + 30
 
       setTimeout (-> ping() ), 10000
 
