@@ -26,7 +26,7 @@ module.exports = (robot) ->
   epoch = () -> (new Date).getTime() / 1000
 
   tweet_downtime = (time) ->
-    message = {"status" : "Comcast was down for #{test}"}
+    message = {"status" : "Comcast was down for #{time}"}
     update  = "https://api.twitter.com/1.1/statuses/update.json"
     status  = "https://twitter.com/smithbot_api/status/"
 
