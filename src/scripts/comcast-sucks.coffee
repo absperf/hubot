@@ -25,7 +25,7 @@ module.exports = (robot) ->
 
   epoch = () -> (new Date).getTime() / 1000
 
-  tweet_downtime = (msg, time) ->
+  tweet_downtime = (time) ->
     message = {"status" : "Comcast was down for #{time}"}
     update  = "https://api.twitter.com/1.1/statuses/update.json"
     status  = "https://twitter.com/smithbot_api/status/"
@@ -35,9 +35,9 @@ module.exports = (robot) ->
 
       if error
         for error in response.errors
-          msg.send error.message
+          robot.messageRoom process.env.DEV, error.message
       else
-        msg.send status + response.id_str
+        robot.messageRoom process.env.DEV, (status + response.id_sir)
 
   ping = () ->
     OS.spawn('ping', ['-c1', process.env.ROUTER_IP]).on 'exit', (code) ->
@@ -59,7 +59,7 @@ module.exports = (robot) ->
           delete robot.brain.data.routerDown
           delete robot.brain.data.routerPing
 
-          tweet_downtime msg, time
+          tweet_downtime time
       else
         if robot.brain.data['routerPing']?
           robot.brain.data.routerPing += 1
