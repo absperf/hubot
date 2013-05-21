@@ -56,10 +56,10 @@ module.exports = (robot) ->
           second = Math.floor(difference % 60)
           time = time.concat("#{second} seconds ") if second > 0
 
+          tweet_downtime(time)
+
           delete robot.brain.data.routerDown
           delete robot.brain.data.routerPing
-
-          tweet_downtime time
       else
         if robot.brain.data['routerPing']?
           if robot.brain.data.routerPing = 3
