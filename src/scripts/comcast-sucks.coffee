@@ -37,7 +37,7 @@ module.exports = (robot) ->
         for error in response.errors
           robot.messageRoom process.env.DEV, error.message
       else
-        robot.messageRoom process.env.DEV, (status + response.id_sir)
+        robot.messageRoom process.env.DEV, (status + response.id_str)
 
   ping = () ->
     OS.spawn('ping', ['-c1', process.env.ROUTER_IP]).on 'exit', (code) ->
