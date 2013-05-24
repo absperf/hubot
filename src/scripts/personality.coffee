@@ -65,20 +65,6 @@ module.exports = (robot) ->
     else
       msg.send "I don't remember anything."
 
-  robot.hear /^(.+)$/i, (msg) ->
-    message = msg.match[1]
-
-    unless message.match /^Smith:/
-      if memory = remember(message)
-        if memory.action
-          msg.message.text = "Smith: #{memory.action}"
-          robot.receive msg.message
-        else if memory.sound
-          msg.play memory.sound
-        else if msg.message.user.name != 'Smith'
-          msg.send memory.response
-        msg.message.done = true
-
   robot.respond /when you hear (.+?) say (.+?)$/i, (msg) ->
     pattern = msg.match[1]
     response = msg.match[2]
@@ -127,3 +113,18 @@ module.exports = (robot) ->
     forget(pattern)
     msg.send "I'll stop responding to #{pattern}"
     msg.message.done = true
+
+  robot.hear /^(.+)$/i, (msg) ->
+    message = msg.match[1]
+
+    unless message.match /^Smith:/
+      if memory = remember(message)
+        if memory.action
+          msg.message.text = "Smith: #{memory.action}"
+          robot.receive msg.message
+        else if memory.sound
+          msg.play memory.sound
+        else if msg.message.user.name != 'Smith'
+          msg.send memory.response
+        msg.message.done = true
+
