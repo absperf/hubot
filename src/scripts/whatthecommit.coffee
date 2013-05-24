@@ -6,7 +6,7 @@
 #   hubot whatthecommit(?)
 
 module.exports = (robot) ->
-  robot.respond /(wtc|whatthecommit)(\?)?/i, (msg) ->
+  robot.respond /(wtc|whatthecommit|random commit message)(\?)?/i, (msg) ->
     msg.http('http://www.whatthecommit.com/index.txt')
       .get() (err, res, body) -> msg.send body.trim()
 
