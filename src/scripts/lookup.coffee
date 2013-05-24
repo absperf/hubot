@@ -6,7 +6,7 @@
 Wolfram = require('wolfram').createClient(process.env.WOLFRAM_APP_ID)
 
 module.exports = (robot) ->
-  robot.respond /(lookup|who is|where is|what is) (.*)$/i, (msg) ->
+  robot.respond /(lookup|where is|what is) (.*)$/i, (msg) ->
     Wolfram.query msg.match[2], (e, result) ->
       if result and result.length > 0
         msg.send result[1]['subpods'][0]['value']
