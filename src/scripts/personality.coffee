@@ -60,7 +60,10 @@ module.exports = (robot) ->
     (robot.brain.data.memories.filter (m) -> message.match RegExp(m.pattern, 'i')).shift()
 
   robot.respond /what do you remember\??$/i, (msg) ->
-    msg.send JSON.stringify(robot.brain.data.memories)
+    if robot.brain.data.memories.length > 0
+      msg.send JSON.stringify(robot.brain.data.memories)
+    else
+      msg.send "I don't remember anything."
 
   robot.hear /^(.+)$/i, (msg) ->
     message = msg.match[1]
