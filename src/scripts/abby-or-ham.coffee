@@ -1,11 +1,11 @@
 # Description:
-#   Locate Abbey
+#   Locate Abby or Ham
 #
 # Commands:
-#   hubot where is abbey
+#   hubot where is [abby|ham]
 
 module.exports = (robot) ->
-  robot.respond /(where is|find) abb(e)?y/i, (msg) ->
+  robot.respond /(where is|find) (abby|ham)/i, (msg) ->
     locations = [
       "right behind you!",
       'at your house, going through your things.',
