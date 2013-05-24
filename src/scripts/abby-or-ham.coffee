@@ -26,5 +26,8 @@ module.exports = (robot) ->
       'counting the seconds until you two can be together... FOREVER.'
     ]
 
-    msg.send "She's #{locations[Math.floor(Math.random() * locations.length)]}"
+    person = "He"
+    person = "She" if msg.match[2].match /abby/i
+
+    msg.send "#{person}'s #{locations[Math.floor(Math.random() * locations.length)]}"
 
