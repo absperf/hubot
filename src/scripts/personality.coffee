@@ -61,7 +61,8 @@ module.exports = (robot) ->
 
   robot.respond /what do you remember\??$/i, (msg) ->
     if robot.brain.data.memories.length > 0
-      msg.send JSON.stringify(robot.brain.data.memories)
+
+      msg.send "\n#{JSON.stringify(robot.brain.data.memories)}"
     else
       msg.send "I don't remember anything."
 
