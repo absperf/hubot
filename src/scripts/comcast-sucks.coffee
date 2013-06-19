@@ -70,5 +70,5 @@ module.exports = (robot) ->
 
       setTimeout (-> ping() ), 10000
 
-  ping()
+  # ping()
 
