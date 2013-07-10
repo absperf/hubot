@@ -6,10 +6,11 @@
 
 module.exports = (robot) ->
   robot.respond /(where is|find) (abby|ham)/i, (msg) ->
+
     locations = [
       "right behind you!",
       'at your house, going through your things.',
-      'crying herself to sleep, thinking of you.',
+      'crying to sleep, thinking of you.',
       'rolling around in a pile of your hair that she stole from the barber.',
       'knocking on your door at 2AM.',
       'filling out a loan application in your name.',
@@ -26,8 +27,10 @@ module.exports = (robot) ->
       'counting the seconds until you two can be together... FOREVER.'
     ]
 
-    person = "He"
-    person = "She" if msg.match[2].match /abby/i
+    location = locations[Math.floor(Math.random() * locations.length)]
 
-    msg.send "#{person}'s #{locations[Math.floor(Math.random() * locations.length)]}"
+    if msg.match[2].match  /abby/i
+      msg.send "She's #{location}"
+    else
+      msg.send "He's #{location.replace(' she ', ' he ').replace(' her ', ' his ')}"
 
