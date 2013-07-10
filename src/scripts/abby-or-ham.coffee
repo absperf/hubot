@@ -33,7 +33,7 @@ module.exports = (robot) ->
       msg.send "She's #{location}"
     else
       location = location.replace(' she ', ' he ')          #
-      location = location.replace(' her ', ' his')          # this is not awesome
+      location = location.replace(' her ', ' his ')          # this is not awesome
       location = location.replace(' herself ', ' himself ') #
 
       msg.send "He's #{location}"
