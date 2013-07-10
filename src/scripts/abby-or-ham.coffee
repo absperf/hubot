@@ -10,7 +10,7 @@ module.exports = (robot) ->
     locations = [
       "right behind you!",
       'at your house, going through your things.',
-      'crying to sleep, thinking of you.',
+      'crying to herself sleep, thinking of you.',
       'rolling around in a pile of your hair that she stole from the barber.',
       'knocking on your door at 2AM.',
       'filling out a loan application in your name.',
@@ -32,5 +32,9 @@ module.exports = (robot) ->
     if msg.match[2].match  /abby/i
       msg.send "She's #{location}"
     else
-      msg.send "He's #{location.replace(' she ', ' he ').replace(' her ', ' his ')}"
+      location = location.replace(' she ', ' he ')          #
+      location = location.replace(' her ', ' his')          # this is not awesome
+      location = location.replace(' herself ', ' himself ') #
+
+      msg.send "He's #{location}"
 
