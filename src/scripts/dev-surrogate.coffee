@@ -1,9 +1,6 @@
 # Description:
-#   NinjaMe is the most important thing in Tim's life
+#   A Developer Surrogate Plugin
 #
-# Commands:
-#   hubot ninja me - Receive a ninja
-
 module.exports = (robot) ->
 
   fixes = [
