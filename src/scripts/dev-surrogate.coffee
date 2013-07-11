@@ -28,7 +28,7 @@ module.exports = (robot) ->
       "That isn't going to work.",
       "What a terrible idea.",
       "I don't think you thought that through.",
-      "Your idea is terrible and you should feel terrible."
+      "Your idea is bad and you should feel bad."
     ],
     good: [
       "That just might work.",
@@ -45,7 +45,7 @@ module.exports = (robot) ->
     fix = fixes[Math.floor(Math.random() * fixes.length)]
     setTimeout (-> msg.send "Okay, #{target} has been fixed. #{fix}"), 5000
 
-  robot.respond /(do you think)|(should we)/i, (msg) ->
+  robot.respond /(is it)|(do you think)|(should we)/i, (msg) ->
     responses = ideas[Object.keys(ideas)[Math.floor(Math.random() * 2)]]
 
     msg.send responses[Math.floor(Math.random() * responses.length)]
