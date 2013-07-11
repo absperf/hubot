@@ -45,7 +45,7 @@ module.exports = (robot) ->
     fix = fixes[Math.floor(Math.random() * fixes.length)]
     setTimeout (-> msg.send "Okay, #{target} has been fixed. #{fix}"), 5000
 
-  robot.respond /(\w+ idea)|(do you think)|(should we)/i, (msg) ->
+  robot.respond /(do you think)|(should we)/i, (msg) ->
     responses = ideas[Object.keys(ideas)[Math.floor(Math.random() * 2)]]
 
     msg.send responses[Math.floor(Math.random() * responses.length)]
