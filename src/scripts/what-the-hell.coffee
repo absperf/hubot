@@ -20,4 +20,4 @@ module.exports = (robot) ->
       else
         msg.send "I can't even read my own log."
 
-      setTimeout (-> msg.send output), 2000
+      setTimeout (-> msg.send output.join("\n")), 2000
