@@ -11,7 +11,9 @@ module.exports = (robot) ->
   robot.respond /ssbe-eval (.+com) (.+)/i, (msg) ->
     backend = msg.match[1]
     code = msg.match[2]
-    ssbe = spawn('ruby', ['-ractive_support', '-rdatapathy', '-rssbe/models/core', '-rssbe/models/alarm', '-rssbe/models/analytics', '-rssbe/models/webwalk', '-e', "Datapathy.adapter = Datapathy.adapters[:ssbe] = Datapathy::Adapters::SsbeAdapter.new(username: '#{process.env.SSBE_USER}', password: '#{process.env.SSBE_PASS}', backend: '#{backend}'); eval '#{code}'"])
+    user = process.env.SSBE_USER
+    pass = process.env.SSBE_PASS
+    ssbe = spawn('ruby', ['-ractive_support', '-rdatapathy', '-rssbe/models/core', '-rssbe/models/alarm', '-rssbe/models/analytics', '-rssbe/models/webwalk', '-e', "Datapathy.adapter = Datapathy.adapters[:ssbe] = Datapathy::Adapters::SsbeAdapter.new(username: '#{user}', password: '#{pass}', backend: '#{backend}'); eval '#{code}'"])
 
     output = []
     ssbe.stdout.on 'data', (data) -> output.push(data)
