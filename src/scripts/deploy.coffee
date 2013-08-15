@@ -62,9 +62,10 @@ module.exports = (robot) ->
     'ssint2-dbq04': '172.18.0.24'
     'qapp06-proc01': '172.17.10.18'
     'qapp06-proc02': '172.17.10.19'
-    'qapp06-db01':   '172.17.10.16'
-    'qapp06-db02':   '172.17.10.22'
-    'qapp06-db03':   '172.17.10.11'
+    'qapp06-proc03': '172.17.10.33'
+    'qapp06-proc04': '172.17.10.34'
+    'qapp06-db04':   '172.17.10.24'
+    'qapp06-db07':   '172.17.10.27'
     'aj-db01':     '192.168.31.21'
     'aj-proc01':  '192.168.31.31'
     'aj-poll01':   '192.168.31.51'
@@ -83,8 +84,10 @@ module.exports = (robot) ->
     'ssint2-dbq04': ['ssint2-dbq04']
     'qapp06-proc01': ['qapp06-proc01']
     'qapp06-proc02': ['qapp06-proc02']
-    'qapp06-db02': ['qapp06-db02']
-    'qapp06-db03': ['qapp06-db03']
+    'qapp06-proc03': ['qapp06-proc03']
+    'qapp06-proc04': ['qapp06-proc04']
+    'qapp06-dbq04': ['qapp06-dbq04']
+    'qapp06-dbq07': ['qapp06-dbq07']
     'aj-proc01': ['aj-proc01']
     'aj-db01': ['aj-db01']
 
