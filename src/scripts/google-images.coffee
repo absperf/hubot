@@ -38,8 +38,8 @@ imageMe = (msg, query, animated, cb) ->
       if images.responseData? && images.responseData.results?
         images = images.responseData.results
 
-        if images.responseData.results.length > 0
-          image  = msg.random images.responseData.results
+        if images.length > 0
+          image  = msg.random images
           cb "#{image.unescapedUrl}#.png"
         else
           cb "I couldn't find a picture that matches '#{query}'."
