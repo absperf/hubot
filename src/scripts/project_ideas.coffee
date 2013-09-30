@@ -13,7 +13,7 @@ inventIdea = (msg) ->
   idea.push random(intros)
   idea.push 'web app like'
   idea.push random(projects)
-  idea.push 'geared towards'
+  idea.push 'for'
   idea.push random(types)
   idea.push random(targets)
 
