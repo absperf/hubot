@@ -44,5 +44,7 @@ imageMe = (msg, query, animated, cb) ->
         else
           cb "I couldn't find a picture that matches '#{query}'."
       else
-        cb "Error: #{err}"
-
+        if err
+          cb err
+        else
+          imageMe msg, query, animated, cb
