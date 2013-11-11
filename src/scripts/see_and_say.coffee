@@ -7,6 +7,7 @@
 #   hubot list cowfiles
 
 spawn = require('child_process').spawn
+exec = require('child_process').exec
 
 module.exports = (robot) ->
 
@@ -16,11 +17,14 @@ module.exports = (robot) ->
     proc = spawn "cowsay", ['-f', animal, message]
 
     proc.stdout.on 'data', (data) ->
-      callback(data.toString())
+      callback data.toString()
 
-#  cowList = (callback) ->
-#    childproc.exec "cowsay -l | tail -n +2", (error, stdout, stderr) ->
-#      callback stdout
+    proc.stderr.on 'data', (data) ->
+      process.stderr.write data
+
+  cowList = (callback) ->
+    exec "cowsay -l | tail -n +2", (error, stdout, stderr) ->
+      callback stdout
 
   robot.respond /what does the (\w+) say\??/i, (msg) ->
     smith = robot.usersForFuzzyName(robot.name)[0]
