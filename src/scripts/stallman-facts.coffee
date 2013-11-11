@@ -8,11 +8,10 @@
 #   None
 #
 # Commands:
-#   hubot stallman - Returns a Richard Stallman fact.
+#   hubot stallman fact - Returns a Richard Stallman fact.
 #
 # Author:
 #   marsam
-
 
 wisdom = [
   "Richard Stallman takes notes in binary."
