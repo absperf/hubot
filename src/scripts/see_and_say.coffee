@@ -11,6 +11,8 @@ childproc = require 'child_process'
 module.exports = (robot) ->
 
   cowSay = (message, animal, callback) ->
+    animal = (if /cow/i.test(animal) then "default" else animal)
+
     childproc.exec "cowsay -f \"#{animal}\" #{message}", (error, stdout, stderr) ->
       callback stdout, error
 
@@ -22,7 +24,7 @@ module.exports = (robot) ->
     smith = robot.usersForFuzzyName('Smith')[0]
     animal = msg.match[1]
 
-    cowSay smith.cowPhrase, (if /cow/i.test(animal) then "default" else animal), (stdout, error) ->
+    cowSay smith.cowPhrase, animal, (stdout, error) ->
       if error is null
         msg.send stdout
       else
@@ -40,6 +42,10 @@ module.exports = (robot) ->
     smith.cowPhrase = message
     smith.save
 
-    cowSay smith.cowPhrase, (if /cow/i.test(animal) then "default" else animal), (stdout, error) ->
+    cowSay smith.cowPhrase, animal, (stdout, error) ->
+      if error is null
         msg.send stdout
+      else
+        cowSay smith.cowPhrase, "default", (stdout, error) ->
+          msg.send stdout
 
