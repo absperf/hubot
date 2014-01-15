@@ -9,6 +9,6 @@ module.exports = (robot) ->
   robot.hear /(can i get|gimme|give me) an? (.+) on 3/i, (msg) ->
 
     setTimeout (-> msg.send '1'), 2000
-    setTimeout (-> msg.send '2'), 4000
-    setTimeout (-> msg.send '3'), 6000
-    setTimeout (-> msg.send spiritShout.toUpperCase() + '!!!'), 10000
+    setTimeout (-> msg.send '2'), 3000
+    setTimeout (-> msg.send '3'), 4000
+    setTimeout (-> msg.send msg.match[2].toUpperCase() + '!!!'), 6000
