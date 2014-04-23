@@ -7,8 +7,7 @@
 module.exports = (robot) ->
 
   robot.hear /(can i get|gimme|give me) an? (.+) on 3/i, (msg) ->
-
-    setTimeout (-> msg.send '1'), 2000
-    setTimeout (-> msg.send '2'), 3000
-    setTimeout (-> msg.send '3'), 4000
+    for i in [1, 2, 3]
+      setTimeout (-> msg.send i.toString()), (i + 1) * 1000
     setTimeout (-> msg.send msg.match[2].toUpperCase() + '!!!'), 6000
+
