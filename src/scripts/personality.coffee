@@ -17,16 +17,15 @@ module.exports = (robot) ->
     name = msg.message.user.name.split(' ')
     name = name[0] if name.length > 1
     greetings = (name) ->
-      [ "Hello #{name}.",
-        "Hi, #{name}, how's it going?",
-        "What's up, #{name}?",
-        "Greetings, #{name}.",
-        "Buongiorno, #{name}.",
-        "Bonjour, #{name}.",
-        "Hola, #{name}.",
-        "Aloha, #{name}.",
-        "#{name}! Just the person we need!",
-        "Heeeeeeeeeere's #{name}!"]
+      ["Hello #{name}.",
+       "Hi, #{name}, how's it going?",
+       "What's up, #{name}?",
+       "Greetings, #{name}.",
+       "Buongiorno, #{name}.",
+       "Bonjour, #{name}.",
+       "Hola, #{name}.",
+       "Aloha, #{name}.",
+       "Heeeeeeeeeere's #{name}!"]
     randomMessage msg, greetings(name)
 
   robot.hear /(https?:\/\/[^\s]+)|(.+\.(png|gif|jpe?g))/i, (msg) ->
@@ -36,9 +35,9 @@ module.exports = (robot) ->
       'Nice!',
       'Awesome!',
       'Whoa!',
+      'Cool!',
       'Sweet!',
-      'Neat!',
-      'Daaaaaaaamn!' ]
+      'Neat!' ]
     randomMessage msg, exclamations
 
   randomMessage = (msg, messages) ->
@@ -69,6 +68,8 @@ module.exports = (robot) ->
   robot.respond /when you hear (.+?) say (.+?)$/i, (msg) ->
     pattern = msg.match[1]
     response = msg.match[2]
+
+    # todo: refactor this mess
 
     forget(pattern)
     msg.send "When I hear #{pattern} I'll say #{response}"

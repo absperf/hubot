@@ -41,11 +41,6 @@ module.exports = (robot) ->
       "I surrender to destiny!",
       "End of line.",
       'Bye bye kids! Have fun storming the castle!',
-      'http://sae.tweek.us/static/images/emoticons/emot-smithicide.gif'
-      'http://sae.tweek.us/static/images/emoticons/emot-emo.gif',
-      'http://sae.tweek.us/static/images/emoticons/emot-ghost.gif',
-      'http://sae.tweek.us/static/images/emoticons/emot-suicide.gif',
-      'http://sae.tweek.us/static/images/emoticons/emot-supaburn.gif',
       "Good night, good night! Parting is such sweet sorrow, that I shall say good night 'till it be morrow.",
       "All these moments will be lost in time. Like ... tears in the rain. Time to die."]
     rand = Math.floor(Math.random() * messages.length)
